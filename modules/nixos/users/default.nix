@@ -1,0 +1,6 @@
+{
+  imports = [
+    ./vrad-su.nix
+  ];
+}
+

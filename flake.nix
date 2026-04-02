@@ -8,15 +8,41 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    conflaguration-secrets.flake = true;
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs: let
+    lib = nixpkgs.lib;
+
     nixpkgsSettings = { config.allowUnfree = true; };
-  in {
-    nixosConfigurations.tranticicero = nixpkgs.lib.nixosSystem { modules = [
-      { nixpkgs.hostPlatform = "x86_64-linux"; }
-      nixpkgsSettings
-      ./hosts/tranticicero
+
+    mkSystems = lib.mkMerge;
+
+    mkNixos = hostname: {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem { modules = [
+        nixpkgsSettings
+
+        ./hosts/${hostname}/
+
+        {
+          networking.hostName = hostname;
+        }
+
+        ./modules/nixos/
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        }
+
+        ./modules/home/
+      ]; };
     };
-  };
+  in mkSystems
+  [
+    (mkNixos "tranticicero")
+  ];
 }
