@@ -20,19 +20,17 @@
     mkSystems = lib.mkMerge;
 
     mkNixos = hostname: {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem { modules = [
-        nixpkgsSettings
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          nixpkgsSettings
+          home-manager.nixosModules.home-manager
 
-        ./hosts/${hostname}/
-        ./modules/nixos/
-
-        {
-          networking.hostName = hostname;
-        }
-
-
-        home-manager.nixosModules.home-manager
-      ]; };
+          ./hosts/${hostname}/
+          { networking.hostName = hostname; }
+          ./modules/nixos/
+        ];
+      };
     };
   in mkSystems
   [
