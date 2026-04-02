@@ -7,6 +7,6 @@
     ./home.nix
     ./keyd.nix
     ./networkmanager.nix
-    ./users/
+    ./user.nix
   ];
 }

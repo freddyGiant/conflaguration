@@ -24,21 +24,14 @@
         nixpkgsSettings
 
         ./hosts/${hostname}/
+        ./modules/nixos/
 
         {
           networking.hostName = hostname;
         }
 
-        ./modules/nixos/
 
         home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        }
-
-        # ./modules/home/
       ]; };
     };
   in mkSystems

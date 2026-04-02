@@ -4,11 +4,10 @@
     # description = "Vincent";
     extraGroups = [
       "wheel"
-      "networkmanager"
       "input"
       "audio"
       "video"
-      "docker"
+      # "docker"
     ];
   };
 

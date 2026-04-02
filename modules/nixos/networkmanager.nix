@@ -4,4 +4,6 @@
     wifi.powersave = true;
     plugins = [ pkgs.networkmanager-openconnect ];
   };
+
+  users.users.vrad.extraGroups = [ "networkmanager" ];
 }
