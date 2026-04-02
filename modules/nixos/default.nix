@@ -4,7 +4,7 @@
     ./common.nix
     ./fish.nix
     ./gimp.nix
-    ./home.nix
+    ./home-manager.nix
     ./keyd.nix
     ./networkmanager.nix
     ./user.nix
