@@ -5,3 +5,4 @@
     home.homeDirectory = "/home/vrad";
     home.stateVersion = "25.05";
   };
+};
