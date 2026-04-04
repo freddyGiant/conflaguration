@@ -21,13 +21,10 @@
 
     fish.loginShellInit = lib.mkIf config.my.ssh.enableFishIntegration (let
       kc = config.programs.keychain;
-      strCon = lib.concatStringSep;
       opt = lib.optional;
+      strCon = lib.concatStringSep;
 
-      # keychainBinary = "${keychain.package}/bin/keychain";
-      # withOptionIf = condition: option:
-      #   lib.optional condition " \\\n${option}";
-  
+      # NOTE: this is... fine
       keychainCommand = strCon " \\\n" (lib.concatLists [
         [ "${kc.package}/bin/keychain" ]
         [ "--eval" ]
@@ -36,27 +33,8 @@
         (opt (keychain.agents != [ ])  "--agents ${strCon "," kc.agents}")
         (opt (keychain.keys   != [ ]) (strCon " " keychain.keys}))
       ]);
-    in "${keychainBinary}${withOptionIf true 
-
-      ''
-      ${keychainBinary} \
-        --eval${
-          lib.optionalString
-            (keychain.extraFlags != [ ])
-            " \\\n${lib.concatStringsSep " " keychain.extraFlags}"
-        }${
-          lib.optionalString
-            (keychain.inheritType != null)
-            " \\\n--inherit ${keychain.inheritType}"
-        }${
-          lib.optionalString
-            (keychain.agents != [ ])
-            " \\\n--agents ${lib.concatStringSep "," keychain.agents}"
-        }${
-          lib.optionalString
-            (keychain.keys != [ ])
-            " \\\n${lib.concatStringsSep " " keychain.keys}"
-        } \
+    in ''
+      ${keychainCommand} \
       # | tee /home/vrad/debug \
       | source
     '');
