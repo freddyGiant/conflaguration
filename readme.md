@@ -13,7 +13,8 @@ TODOs, FIXMEs, HACKs, NOTEs, and more exist throughout conflaguration.
 
 Working in this directory, run the following in your preferred shell:
 ```bash
-sudo nixos-rebuild switch --override-input secrets <secrets_path>
+sudo nixos-rebuild switch --override-input secrets <secrets_path> \
+  --experimental-features 'nix-command flakes'
 ```
 ...where `<secrets_path>` is the path to the directory containing your secrets flake.
 
