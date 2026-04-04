@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, secrets, ... }: {
   options = {
     my.ssh.enableFishIntegration =
       lib.hm.shell.mkFishIntegrationOption { inherit config; };
@@ -6,9 +6,26 @@
 
   config = {
     programs.ssh.enable = true;
+    # stupid
+    programs.ssh.enableDefaultConfig = false;
+    programs.ssh.matchBlocks = lib.mkMerge [
+      {
+        "*" = {
+          forwardAgent = false;
+          hashKnownHosts = true;
+          controlMaster = "auto";
+          controlPath = "${final.home.homeDirectory}/.ssh/control/%r_%h_%p";
+          # extraOptions.RequestTTY = "yes";
+        };
+      }
+
+      secrets.hosts
+    ];
+
+    services.ssh-agent.enable = true;
 
     programs.keychain.enable = true;
-    programs.keychain  = {
+    programs.keychain = {
       extraFlags = [];
       keys = [
         "--clear"
@@ -19,7 +36,9 @@
     # but the keychain module has some weird defaults
     programs.keychain.enableFishIntegration = false;
 
-    fish.loginShellInit = lib.mkIf config.my.ssh.enableFishIntegration (let
+    # TODO: better ssh abbrs
+    programs.fish.shellAbbrs.shit = "ssh -t";
+    programs.fish.loginShellInit = lib.mkIf config.my.ssh.enableFishIntegration (let
       kc = config.programs.keychain;
       opt = lib.optional;
       strCon = lib.concatStringSep;

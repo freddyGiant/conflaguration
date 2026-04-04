@@ -11,12 +11,7 @@ in { conflagurationPath, secrets, ... }: {
     la  = "ls --almost-all --escape --color --group-directories-first";
     ll  = "ls --almost-all --escape --color --classify --si -og --group-directories-first";
     moo = "mv --interactive";
-
-    # TODO: move elsewhere?
-    jk  = "trash -r -i";
     rs  = "rsync --verbose --recursive --relative --archive --copy-links";
-    shit = "ssh -t";
-    tree = "tree -C";
 
     # nix abbrs
 
