@@ -1,12 +1,13 @@
-{
-  home-manager = {
-    users.${config.my.username} = { ... }: {
-      imports = [ ../../modules/home ];
-      # home.username = "vrad";
-      # home.homeDirectory = "/home/vrad";
-      # home.stateVersion = "25.05";
-    };
+{ config, ... }: {
+  # TODO: options.my.home-manager.enable
 
+  # including home config as a module, passing down necessary system config
+  home-manager.users.${config.my.username} = { lib, ... }: {
+    imports = [ ../../modules/home ];
+    home.username = lib.mkForce config.my.username;
+  };
+
+  home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
