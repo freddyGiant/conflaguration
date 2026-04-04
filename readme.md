@@ -51,6 +51,11 @@ System username (anticipate change). Overrides `home-manager.config.home.usernam
 *default:* true \
 Whether to emit the `init_end` event at the very end of `config.fish`.
 
+#### my.ssh.enableFishIntegration
+*type:* bool \
+*default:* `home.shell.enableFishIntegration` \
+Whether to enable our custom ssh-keychain-fish-shell integration.
+
 ## Philisophical Tips to Keep Your Head On Straight
 
 - All configuration included by a nixosSystem as created by the flake should behave as if this is machine over which we have full, godlike control. Otherwise, we'd just be using home-manager!

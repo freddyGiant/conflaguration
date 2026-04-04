@@ -4,7 +4,7 @@
   # including home config as a module, passing down necessary system config
   home-manager.users.${config.my.username} = { lib, ... }: {
     imports = [ ../../modules/home ];
-    my.username = lib.mkForce config.my.username;
+    home.username = lib.mkForce config.my.username;
   };
 
   home-manager = {
