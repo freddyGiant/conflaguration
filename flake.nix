@@ -9,26 +9,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    conflaguration-secrets.flake = true;
+    # to be overriden
+    secrets.url = "";
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs: let
+  outputs = { nixpkgs, home-manager, secrets, ... } @ inputs: let
     lib = nixpkgs.lib;
-
-    nixpkgsSettings = { config.allowUnfree = true; };
 
     mkSystems = lib.mkMerge;
 
+    specialArgs = {
+      inherit inputs secrets;
+      conflagurationPath = ./.;
+    };
     mkNixos = hostname: {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        inherit specialArgs;
         modules = [
-          nixpkgsSettings
-          home-manager.nixosModules.home-manager
-
           ./hosts/${hostname}/
-          { networking.hostName = hostname; }
           ./modules/nixos/
+          {
+            networking.hostName = hostname;
+            config.allowUnfree = true;
+          };
+
+          home-manager.nixosModules.home-manager
         ];
       };
     };

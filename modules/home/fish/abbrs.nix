@@ -1,8 +1,7 @@
 let
-  subcommand = command: expansion: { inherit command expansion; }
-
   # could consider adding something more generalized, but that isn't needed for now
-in {
+  subcommand = command: expansion: { inherit command expansion; };
+in { conflagurationPath, secrets, ... }: {
   programs.fish.shellAbbrs = {
     # basic unix abbrs that we might as well always have
     # even if we don't *strictly* know that all these programs are installed
@@ -20,15 +19,18 @@ in {
     tree = "tree -C";
 
     # nix abbrs
+
     "+" = "nix shell nixpkgs#";
     # FIXME: use correct paths
     nrt = ''
-      sudo nixos-rebuild test --impure \
-        --flake ~/conflaguration#${hostname}
+      sudo nixos-rebuild test \
+        --flake ${conflagurationPath} \
+        --override-input secrets ${secrets.path}
     '';
     nrs = ''
-      sudo nixos-rebuild switch --impure \
-        --flake ~/conflaguration#${hostname}
+      sudo nixos-rebuild switch \
+        --flake ${conflagurationPath} \
+        --override-input secrets ${secrets.path}
     '';
 
     fl = subcommand "nix" "flake";

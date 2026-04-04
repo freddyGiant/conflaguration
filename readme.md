@@ -1,24 +1,54 @@
+# vrad's Configuration Conflagaration
+
+<!-- TODO: nice html? lol -->
+> Conflagaration *noun* \
+1 : fire \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*especially* : a large disastrous fire \
+2 : conflict, war \
+<sub>(Merriam-Webster)</sub>
+
+TODOs, FIXMEs, HACKs, NOTEs, and more exist throughout conflaguration.
+
+## Installation
+
+Working in this directory, run the following in your preferred shell:
+```bash
+sudo nixos-rebuild switch --override-input secrets <secrets_path>
+```
+...where `<secrets_path>` is the path to the directory containing your secrets flake.
+
 ## Requirements
 
-### OS Config
+### NixOS
 
-- **Currently, any use of OS Config utilizes Home Config as a module. Thus, all dependencies therein apply here too.**
-- Presence of /etc/conflaguration-secreates/flake.nix
+- NixOS
+- **NixOS conflaguration always utilizes home conflaguration as a module. Thus, all dependencies therein apply here too.**
+- A secrets flake, to override the input stub
+<!-- TODO: elaborate -->
 
 ```
 # /etc/conflaguration/secrets.nix
 ```
 
-### Home Config
+### Home
+
+- Nix
 
 ## Options
 
-### OS Config
+### NixOS
 
 #### `my.username`
-*type:* string matching `/^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$/`
-*default:* `"vrad"`
+*type:* string matching `/^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$/` \
+*default:* `"vrad"` \
 System username (anticipate change). Overrides `home-manager.config.home.username` (`mkForce`).
+
+### Home
+
+#### `my.fish.emitInitEnd`
+*type:* bool \
+*default:* true \
+Whether to emit the `init_end` event at the very end of `config.fish`.
 
 ## Philisophical Tips to Keep Your Head On Straight
 
