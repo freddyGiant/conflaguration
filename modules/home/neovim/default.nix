@@ -18,14 +18,12 @@
     ./treesitter.nix
   ];
 
+  programs.neovim.enable = true;
   programs.neovim = {
-    enable = true;
-
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-
-    extraLuaConfig = /* lua */ "doFile '${./default.lua}'";
   };
+  programs.neovim.extraLuaConfig = /* lua */ "doFile '${./default.lua}'";
 }

@@ -15,6 +15,8 @@
 
   # NOTE: some of these don't really make sense on priveleged/remote machines.
   # worst case, they're just useless.
+  # although, consider moving some to with wm?
+  # TODO: think about this...
   home.packages = with pkgs; [
     # cli, or small utility
     brightnessctl

@@ -1,0 +1,184 @@
+// General
+SingleInstance                                      Roaming, true
+RememberLastDatabases                               Roaming, true
+NumberOfRememberedLastDatabases                     Roaming, 5
+RememberLastKeyFiles                                Roaming, true
+OpenPreviousDatabasesOnStartup                      Roaming, true
+AutoSaveAfterEveryChange                            Roaming, true
+AutoReloadOnChange                                  Roaming, true
+AutoSaveOnExit                                      Roaming, true
+AutoSaveNonDataChanges                              Roaming, true
+BackupBeforeSave                                    Roaming, false
+BackupFilePathPattern                               Roaming, QString("{DB_FILENAME}.old.kdbx")
+UseAtomicSaves                                      Roaming, true
+UseDirectWriteSaves                                 Local, false
+SearchLimitGroup                                    Roaming, false
+MinimizeOnOpenUrl                                   Roaming, false
+HideWindowOnCopy                                    Roaming, false
+MinimizeOnCopy                                      Roaming, true
+MinimizeAfterUnlock                                 Roaming, false
+DropToBackgroundOnCopy                              Roaming, false
+UseGroupIconOnEntryCreation                         Roaming, true
+AutoTypeEntryTitleMatch                             Roaming, true
+AutoTypeEntryURLMatch                               Roaming, true
+AutoTypeDelay                                       Roaming, 25
+AutoTypeStartDelay                                  Roaming, 500
+AutoTypeHideExpiredEntry                            Roaming, false
+GlobalAutoTypeKey                                   Roaming, 0
+GlobalAutoTypeModifiers                             Roaming, 0
+GlobalAutoTypeRetypeTime                            Roaming, 15
+FaviconDownloadTimeout                              Roaming, 10
+UpdateCheckMessageShown                             Roaming, false
+DefaultDatabaseFileName                             Roaming, {}
+
+LastDatabases                                       Local, {}
+LastKeyFiles                                        Local, {}
+LastChallengeResponse                               Local, {}
+LastActiveDatabase                                  Local, {}
+LastOpenedDatabases                                 Local, {}
+LastDir                                             Local, QDir::homePath()
+
+// GUI
+GUI_Language                                        Roaming, QS("system")
+GUI_HideMenubar                                     Roaming, false
+GUI_HideToolbar                                     Roaming, false
+GUI_MovableToolbar                                  Roaming, false
+GUI_HidePreviewPanel                                Roaming, false
+GUI_AlwaysOnTop                                     Local, false
+GUI_ToolButtonStyle                                 Roaming, Qt::ToolButtonIconOnly
+GUI_LaunchAtStartup                                 Roaming, false
+GUI_ShowTrayIcon                                    Roaming, false
+GUI_TrayIconAppearance                              Roaming, {}
+GUI_MinimizeToTray                                  Roaming, false
+GUI_MinimizeOnStartup                               Roaming, false
+GUI_MinimizeOnClose                                 Roaming, false
+GUI_HideUsernames                                   Roaming, false
+GUI_HidePasswords                                   Roaming, true
+GUI_ColorPasswords                                  Roaming, false
+GUI_MonospaceNotes                                  Roaming, false
+GUI_ApplicationTheme                                Roaming, QS("auto")
+GUI_CompactMode                                     Roaming, false
+GUI_CheckForUpdates                                 Roaming, true
+GUI_CheckForUpdatesNextCheck                        Local, 0
+GUI_CheckForUpdatesIncludeBetas                     Roaming, false
+GUI_ShowExpiredEntriesOnDatabaseUnlock              Roaming, true
+GUI_ShowExpiredEntriesOnDatabaseUnlockOffsetDays    Roaming, 3
+
+GUI_MainWindowGeometry                              Local, {}
+GUI_MainWindowState                                 Local, {}
+GUI_ListViewState                                   Local, {}
+GUI_SearchViewState                                 Local, {}
+GUI_SplitterState                                   Local, {}
+GUI_GroupSplitterState                              Local, {}
+GUI_PreviewSplitterState                            Local, {}
+GUI_AutoTypeSelectDialogSize                        Local, QSize(600, 250)
+
+// Security
+Security_ClearClipboard                             Roaming, true
+Security_ClearClipboardTimeout                      Roaming, 10
+Security_ClearSearch                                Roaming, false
+Security_ClearSearchTimeout                         Roaming, 5
+Security_HideNotes                                  Roaming, false
+Security_LockDatabaseIdle                           Roaming, false
+Security_LockDatabaseIdleSeconds                    Roaming, 240
+Security_LockDatabaseMinimize                       Roaming, false
+Security_LockDatabaseScreenLock                     Roaming, true
+Security_RelockAutoType                             Roaming, false
+Security_PasswordsHidden                            Roaming, true
+Security_PasswordEmptyPlaceholder                   Roaming, false
+Security_HidePasswordPreviewPanel                   Roaming, true
+Security_HideTotpPreviewPanel                       Roaming, false
+Security_AutoTypeAsk                                Roaming, true
+Security_IconDownloadFallback                       Roaming, false
+Security_NoConfirmMoveEntryToRecycleBin             Roaming, true
+Security_EnableCopyOnDoubleClick                    Roaming, false
+Security_QuickUnlock                                Local, true
+Security_DatabasePasswordMinimumQuality             Local, 0
+
+// Browser
+Browser_Enabled                                     Roaming, false
+Browser_ShowNotification                            Roaming, true
+Browser_BestMatchOnly                               Roaming, false
+Browser_UnlockDatabase                              Roaming, true
+Browser_MatchUrlScheme                              Roaming, true
+Browser_SupportBrowserProxy                         Roaming, true
+Browser_UseCustomProxy                              Roaming, false
+Browser_CustomProxyLocation                         Roaming, {}
+Browser_UpdateBinaryPath                            Roaming, true
+Browser_AllowGetDatabaseEntriesRequest              Roaming, false
+Browser_AllowExpiredCredentials                     Roaming, false
+Browser_AlwaysAllowAccess                           Roaming, false
+Browser_AlwaysAllowUpdate                           Roaming, false
+Browser_HttpAuthPermission                          Roaming, false
+Browser_SearchInAllDatabases                        Roaming, false
+Browser_SupportKphFields                            Roaming, true
+Browser_NoMigrationPrompt                           Roaming, false
+Browser_UseCustomBrowser                            Local, false
+Browser_CustomBrowserType                           Local, -1
+Browser_CustomBrowserLocation                       Local, {}
+Browser_AllowLocalhostWithPasskeys                  Roaming, false
+#ifdef QT_DEBUG
+Browser_CustomExtensionId                           Local, {}
+#endif
+
+// SSHAgent
+SSHAgent_Enabled                                    Roaming, false
+SSHAgent_UseOpenSSH                                 Roaming, false
+SSHAgent_UsePageant                                 Roaming, true
+SSHAgent_AuthSockOverride                           Local, {}
+SSHAgent_SecurityKeyProviderOverride                Local, {}
+
+// FdoSecrets
+FdoSecrets_Enabled                                  Roaming, false
+FdoSecrets_ShowNotification                         Roaming, true
+FdoSecrets_ConfirmDeleteItem                        Roaming, true
+FdoSecrets_ConfirmAccessItem                        Roaming, true
+FdoSecrets_UnlockBeforeSearch                       Roaming, true
+
+// KeeShare
+KeeShare_QuietSuccess                               Roaming, false
+KeeShare_Own                                        Roaming, {}
+KeeShare_Foreign                                    Roaming, {}
+KeeShare_Active                                     Roaming, {}
+
+// PasswordGenerator
+PasswordGenerator_LowerCase			    Roaming, true
+PasswordGenerator_UpperCase               	    Roaming, true
+PasswordGenerator_Numbers                 	    Roaming, true
+PasswordGenerator_EASCII                  	    Roaming, false
+PasswordGenerator_AdvancedMode            	    Roaming, false
+PasswordGenerator_SpecialChars            	    Roaming, true
+PasswordGenerator_Braces                  	    Roaming, false
+PasswordGenerator_Punctuation             	    Roaming, false
+PasswordGenerator_Quotes                  	    Roaming, false
+PasswordGenerator_Dashes                  	    Roaming, false
+PasswordGenerator_Math                    	    Roaming, false
+PasswordGenerator_Logograms               	    Roaming, false
+PasswordGenerator_AdditionalChars         	    Roaming, {}
+PasswordGenerator_ExcludedChars           	    Roaming, {}
+PasswordGenerator_ExcludeAlike            	    Roaming, true
+PasswordGenerator_EnsureEvery             	    Roaming, true
+PasswordGenerator_Length                  	    Roaming, 20
+PasswordGenerator_WordCount               	    Roaming, 7
+PasswordGenerator_WordSeparator           	    Roaming, QS(" ")
+PasswordGenerator_WordList                	    Roaming, QS("eff_large.wordlist")
+PasswordGenerator_WordCase                	    Roaming, 0
+PasswordGenerator_Type                    	    Roaming, 0
+
+// Messages
+Messages_NoLegacyKeyFileWarning           	    Roaming, false
+Messages_Qt55CompatibilityWarning         	    Local, false
+Messages_HidePreReleaseWarning            	    Local, {}}
+
+{
+  Browser.Enabled = true;
+
+  GUI = {
+    AdvancedSettings = true;
+    ApplicationTheme = "dark";
+    CompactMode = true;
+    HidePasswords = true;
+  };
+
+  SSHAgent.Enabled = true;
+}
