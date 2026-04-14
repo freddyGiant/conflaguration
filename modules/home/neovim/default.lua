@@ -66,7 +66,9 @@ do
   }
 
   vim.keymap.set('n', [[<A-c>]], [[zc]])
+  vim.keymap.set('n', [[<A-C>]], [[zC]])
   vim.keymap.set('n', [[<A-o>]], [[zo]])
+  vim.keymap.set('n', [[<A-O>]], [[zO]])
   -- vim.keymap.set('n', '<A-j>', 'zj')
   -- vim.keymap.set('n', '<A-k>', 'zk')
   -- vim.keymap.set('n', '<A-v>', 'zv')
@@ -88,6 +90,7 @@ do
   -- SCROLLING
   vim.o.scrolloff = 4
   -- CENTER CURSOR ON MOVE
+
   vim.api.nvim_create_autocmd(
     { 'BufEnter', 'CursorMoved', 'CursorMovedI', }, {
       callback = function()

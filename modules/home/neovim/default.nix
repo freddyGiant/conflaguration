@@ -15,7 +15,8 @@
 #   - plugin probably suffices?
 {
   imports = [
-    ./plugins.nix
+    ./plugins/
+    ./lsp.nix
   ];
 
   programs.neovim = {
@@ -26,6 +27,6 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = 'doFile ${./default.lua}';
+    extraLuaConfig = /* lua */ "doFile '${./default.lua}'";
   };
 }
