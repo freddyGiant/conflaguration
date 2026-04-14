@@ -46,15 +46,23 @@ System username (anticipate change). Overrides `home-manager.config.home.usernam
 
 ### Home
 
-#### `my.fish.emitInitEnd`
-*type:* bool \
-*default:* true \
-Whether to emit the `init_end` event at the very end of `config.fish`.
+<!-- #### `my.fish.emitInitEnd` -->
+<!-- *type:* bool \ -->
+<!-- *default:* true \ -->
+<!-- Whether to emit the `init_end` event at the very end of `config.fish`. Note that [fish makes no guarantees](https://fishshell.com/docs/current/language.html#event) about the execution order of functions attached to a given event. -->
+
+<!-- Enables emitting the Fish `init_end` event before the init script finishes running (regardless of whether the shell is a login shell, an interactive shell, etc.). See [](https://fishshell.com/docs/current/language.html#event). Note that, as stated in the documentation, no guarantees are made about the order in which attached event-handling function are executed. For instance, as of writing, the only attached function is one that `exec`s the sway desktop environment. This could occur before other functions attached to `init_end` could be run. -->
 
 #### my.ssh.enableFishIntegration
 *type:* bool \
 *default:* `home.shell.enableFishIntegration` \
 Whether to enable our custom ssh-keychain-fish-shell integration.
+
+<!-- #### my.neovim.grammars -->
+<!-- *type:* list\[string] \ -->
+<!-- *default:* \[ ] \ -->
+<!---->
+<!-- Names of `pkgs.vimPlugins` packages to install as treesitter grammars. -->
 
 ## Philisophical Tips to Keep Your Head On Straight
 
