@@ -4,8 +4,6 @@
 #   - wrapping?
 #   <!-- - show wc (or at least get it easily) -->
 #   - get wc (general?) (map \<leader>wc?)
-#   - gj/gk maps??
-#     - might be confusing/make bad habits
 #
 # - TS
 #   - md

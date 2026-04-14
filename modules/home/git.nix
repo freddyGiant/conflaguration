@@ -29,7 +29,7 @@
   };
 
   programs.fish.shellAbbrs.g = "git";
-  programs.fish.shellAbbrs = builtins.mapAttrs (_: expansion: {
+  programs.fish.shellAbbrs = mapAttrs (_: expansion: {
     command = "git";
     inherit expansion;
   }) {

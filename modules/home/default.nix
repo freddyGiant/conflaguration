@@ -16,6 +16,7 @@
   home.packages = with pkgs; [
     ncdu
     killall
+    styluslabs-write
   ];
 
   programs.fd.enable = true;
