@@ -15,8 +15,9 @@
 #   - plugin probably suffices?
 {
   imports = [
-    ./plugins/
     ./lsp.nix
+    ./plugins/
+    ./treesitter.nix
   ];
 
   programs.neovim = {
