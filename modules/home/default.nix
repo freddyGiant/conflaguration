@@ -1,4 +1,4 @@
-{
+{ lib, pkgs, ... }: {
   imports = [
     ./directories.nix
     ./fish/
@@ -6,11 +6,12 @@
     ./keepassxc.nix
     ./neovim/
     ./ssh.nix
+    ./tex.nix
     ./trash.nix
     ./tree.nix
   ];
 
-  home.username = "vrad";
+  home.username = lib.mkDefault "vrad";
 
   home.packages = with pkgs; [
     ncdu
