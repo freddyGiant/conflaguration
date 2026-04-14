@@ -36,8 +36,9 @@
     # but the keychain module has some weird defaults
     programs.keychain.enableFishIntegration = false;
 
-    # TODO: better ssh abbrs
     programs.fish.shellAbbrs.shit = "ssh -t";
+    # M necessary?
+    programs.fish.shellAbbrs.shbg = "ssh -MNTf";
     programs.fish.loginShellInit = lib.mkIf config.my.ssh.enableFishIntegration (let
       kc = config.programs.keychain;
       opt = lib.optional;
