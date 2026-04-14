@@ -1,7 +1,7 @@
-let
+{ conflagurationPath, secrets, ... }: let
   # could consider adding something more generalized, but that isn't needed for now
   subcommand = command: expansion: { inherit command expansion; };
-in { conflagurationPath, secrets, ... }: {
+in {
   programs.fish.shellAbbrs = {
     # basic unix abbrs that we might as well always have
     # even if we don't *strictly* know that all these programs are installed
@@ -17,6 +17,7 @@ in { conflagurationPath, secrets, ... }: {
 
     "+" = "nix shell nixpkgs#";
     # FIXME: use correct paths
+    # NOTE: if we used ./. here it would be the store path (i.e., the already-active config)
     nrt = ''
       sudo nixos-rebuild test \
         --flake ${conflagurationPath} \
