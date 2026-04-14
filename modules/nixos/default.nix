@@ -6,6 +6,7 @@
     ./home-manager.nix
     ./keyd.nix
     ./networkmanager.nix
+    ./niri.nix
     ./user.nix
   ];
 
@@ -15,14 +16,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canToughEfiVariables = true;
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
-  };
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 
   boot.tmp.cleanOnBoot = true;
   nix.settings.auto-optimise-store = true;
 
+  config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
 }

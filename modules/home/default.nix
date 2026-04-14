@@ -5,6 +5,7 @@
     ./git.nix
     ./keepassxc.nix
     ./neovim/
+    ./niri.nix
     ./ssh.nix
     ./tex.nix
     ./trash.nix

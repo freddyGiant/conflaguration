@@ -9,17 +9,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri.url = "github:sodiboo/niri-flake";
+
     # to be overriden
     secrets.url = "";
   };
 
-  outputs = { nixpkgs, home-manager, secrets, ... } @ inputs: let
+  outputs = { nixpkgs, home-manager, niri, secrets, ... } @ inputs: let
     lib = nixpkgs.lib;
 
     mkSystems = lib.mkMerge;
 
     specialArgs = {
-      inherit inputs secrets;
+      inherit inputs niri secrets;
       conflagurationPath = ./.;
     };
     mkNixos = hostname: {
@@ -28,10 +30,7 @@
         modules = [
           ./hosts/${hostname}/
           ./modules/nixos/
-          {
-            networking.hostName = hostname;
-            config.allowUnfree = true;
-          };
+          { networking.hostName = hostname; };
 
           home-manager.nixosModules.home-manager
         ];
