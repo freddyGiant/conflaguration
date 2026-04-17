@@ -20,6 +20,7 @@
     "markdown-inline"
     "nix"
     "python"
+    "qmljs"
     "regex"
     /* experimental, for SML */ "ocaml"
   ];
