@@ -2,33 +2,15 @@
 { config, lib, pkgs, modulesPath, ... }: {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-	"nvme"
-	"xhci_pci"
-	"ehci_pci"
-	"sdhci_pci"
-	"ahci"
-	"usb_storage"
-	"sd_mod"
-	"rtsx_pci_sdmmc"
-      ];
-
-      kernelModules = [
-	"dm-snapshot"
-	"cryptd"
-      ];
-
-      luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
-
-      # TODO: figure out wtf is happening here
-      systemd.dbus.enable = true;
-    };
-
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
-  };
+  boot.initrd.availableKernelModules = [
+    "nvme" "xhci_pci" "sdhci_pci"
+    # manually added
+    "ahci" "ehci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
+  ];
+  boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" ];
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_ROOT";
@@ -54,6 +36,8 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+
+  boot.initrd.systemd.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.enableAllFirmware = true;
