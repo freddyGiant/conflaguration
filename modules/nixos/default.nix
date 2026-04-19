@@ -2,6 +2,7 @@
   imports = [
     ./bluetooth.nix
     ./fish.nix
+    ./fonts.nix
     ./gimp.nix
     ./home-manager.nix
     ./keyd.nix
