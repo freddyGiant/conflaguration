@@ -32,7 +32,7 @@
   security.rtkit.enable = true;
 
   i18n.defaultLocale = "C.UTF-8";
-  time.timeZone = secrets.timezone;
+  time.timeZone = secret-settings.timezone;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canToughEfiVariables = true;

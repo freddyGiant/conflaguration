@@ -1,4 +1,4 @@
-{ config, lib, secrets, ... }: {
+{ config, lib, secret-settings, ... }: {
   options = {
     my.ssh.enableFishIntegration =
       lib.hm.shell.mkFishIntegrationOption { inherit config; };
@@ -19,7 +19,7 @@
         };
       }
 
-      secrets.hosts
+      secret-settings.hosts
     ];
 
     services.ssh-agent.enable = true;

@@ -1,4 +1,4 @@
-{ config, inputs, secrets, ... }: {
+{ config, inputs, secret-settings, ... }: {
   # TODO: options.my.home-manager.enable
 
   # including home config as a module, passing down necessary system config
@@ -10,6 +10,6 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs secrets; };
+    extraSpecialArgs = { inherit inputs secret-settings; };
   };
 };

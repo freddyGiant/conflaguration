@@ -13,10 +13,10 @@ TODOs, FIXMEs, HACKs, NOTEs, and more exist throughout conflaguration.
 
 Working in this directory, run the following in your preferred shell:
 ```bash
-sudo nixos-rebuild switch --override-input secrets <secrets_path> \
+sudo nixos-rebuild switch --override-input secret-settings <secrets_path> \
   --experimental-features 'nix-command flakes'
 ```
-...where `<secrets_path>` is the path to the directory containing your secrets flake.
+...where `<secrets_path>` is the path to the directory containing your secret-settings flake.
 
 ## Requirements
 
@@ -24,11 +24,11 @@ sudo nixos-rebuild switch --override-input secrets <secrets_path> \
 
 - NixOS
 - **NixOS conflaguration always utilizes home conflaguration as a module. Thus, all dependencies therein apply here too.**
-- A secrets flake, to override the input stub
+- A secret-settings flake, to override the input stub
 <!-- TODO: elaborate -->
 
 ```
-# /etc/conflaguration/secrets.nix
+# /etc/conflaguration/secret-settings.nix
 ```
 
 ### Home

@@ -1,3 +1,7 @@
+# TODO: separate languages into modules, perhaps even outside of neovim
+# TODO: on_attach as shared library method.
+#   - reconsider on_attach augroup.
+# TODO: qmlls
 { pkgs, ... }: {
   programs.neovim = {
     plugins = [ pkgs.vimPlugins.nvim-lspconfig ];
