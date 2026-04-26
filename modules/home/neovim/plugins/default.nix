@@ -1,5 +1,6 @@
 { pkgs, ... }: let
-  inherit (import ./lib.nix) pluginConfigFromFile;
+  # inherit (import ./lib.nix) pluginConfigFromFile;
+  pluginConfigFromFile = (import ./lib.nix).pluginConfigFromFile pkgs;
 in {
   imports = [
     ./leap-nvim.nix

@@ -13,9 +13,13 @@
         "*" = {
           forwardAgent = false;
           hashKnownHosts = true;
+          extraOptions.RequestTTY = "yes";
+
           controlMaster = "auto";
           controlPath = "${final.home.homeDirectory}/.ssh/control/%r_%h_%p";
-          # extraOptions.RequestTTY = "yes";
+          controlPersist = "10m";
+          serverAliveInterval = 15;
+          serverAliveCountMax = 3;
         };
       }
 

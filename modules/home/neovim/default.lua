@@ -42,7 +42,8 @@ do
   -- SEARCH
   vim.o.ignorecase = true;
   vim.o.smartcase = true;
-  vim.keymap.set('n', [[<ESC>]], [[<CMD>nohlsearch<CR>]])
+  -- NOTE: CTRL-L does this by default!!!
+  -- vim.keymap.set('n', [[<ESC>]], [[<CMD>nohlsearch<CR>]])
   vim.keymap.set('n', [[n]],     [[nzzzv]])
   vim.keymap.set('n', [[N]],     [[Nzzzv]])
 
@@ -198,8 +199,10 @@ do
       },
       {
         callback = function ()
-          vim.wo.relativenumber = true
-          vim.wo.cursorline = true
+          if vim.wo.number then
+            vim.wo.relativenumber = true
+            vim.wo.cursorline = true
+          end
         end,
         group = group,
       }
@@ -213,8 +216,10 @@ do
       },
       {
         callback = function()
-          vim.wo.relativenumber = false
-          vim.wo.cursorline = false
+          if vim.wo.number then
+            vim.wo.relativenumber = false
+            vim.wo.cursorline = false
+          end
         end,
         group = group,
       }
@@ -396,3 +401,5 @@ vim.api.nvim_create_user_command(
     nargs = 0,
   }
 )
+
+-- vim: fdl=0

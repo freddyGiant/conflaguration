@@ -40,6 +40,7 @@
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
 
+  # TODO: look into more settings like these
   boot.tmp.cleanOnBoot = true;
   nix.settings.auto-optimise-store = true;
 
