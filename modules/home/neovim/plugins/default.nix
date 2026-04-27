@@ -1,13 +1,16 @@
-{ pkgs, ... }: let
-  # inherit (import ./lib.nix) pluginConfigFromFile;
-  pluginConfigFromFile = (import ./lib.nix).pluginConfigFromFile pkgs;
-in {
+{ config, pkgs, ... }: {
   imports = [
     ./leap-nvim.nix
     ./todo-comments-nvim.nix
   ];
 
-  programs.neovim.plugins = map pluginConfigFromFile [
+  lib.neovim.plugins.configFromFile = pkgs: name: {
+    plugin = pkgs.vimPlugins.${name};
+    type = "lua";
+    config = builtins.readFile ./${name};
+  };
+
+  programs.neovim.plugins = map config.lib.neovim.plugins.configFromFile [
     "gruvbox-material-nvim"
     "blink-cmp"
   ];

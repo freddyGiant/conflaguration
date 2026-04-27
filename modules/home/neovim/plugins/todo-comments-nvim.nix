@@ -1,8 +1,6 @@
-{ pkgs, ... }: let
-  inherit (import ./lib.nix) pluginConfigFromFile;
-in {
+{ config, pkgs, ... }: {
   programs.neovim.plugins = [
-    (pluginConfigFromFile "todo-comments-nvim")
+    (config.lib.neovim.plugins.configFromFile "todo-comments-nvim")
 
     pkgs.vimPlugins.plenary-nvim # dependency
   ];

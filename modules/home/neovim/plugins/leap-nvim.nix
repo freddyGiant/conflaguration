@@ -1,8 +1,6 @@
-{ pkgs, ... }: let
-  inherit (import ./lib.nix) pluginConfigFromFile;
-in {
+{ config, pkgs, ... }: {
   programs.neovim.plugins = [
-    (pluginConfigFromFile "leap-nvim")
+    (config.lib.neovim.plugins.configFromFile "leap-nvim")
 
     pkgs.vimPlugins.vim-repeat # dependency
   ];
