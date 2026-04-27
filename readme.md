@@ -22,18 +22,44 @@ sudo nixos-rebuild switch --override-input secret-settings <secrets_path> \
 
 ### General
 
-- A secret-settings flake, to override the input stub
-    - Once included on initial installation above, you can continue to use it 
+#### Secret Settings Flake
+
+!!! IMPORTANT !!!
+
+The flake must be constructed as described in this section and its absolute path passed to the installation command above. After running the installation command, subsequent rebuilds using the `nrs` and `nrt` Fish abbreviations will continue to use the path you passed.
+
+This flake is NOT for authentication secrets. Conflaguration currently provides Keepassxc for that. It's for little tidbit settings that contain things that vaguely constitute PII.
+
+Conflaguration expects **all** of these options to have values.
+
+##### `outputs.path`
+
+*type:* path
+Set this to `./.`.
+
+##### `outputs.git.email`
+
+*type:* string
+*corresponding option:* `home-manager.config.programs.git.settings.user.email`
+The email used in git commits, which public online hosts (e.g. GitHub, Codeberg) typically use to associate commits with your account (matched against the emails you've added and/or verified in your online account settings).
+
+I don't want to accidentally give you my email.
+
+##### `outputs.ssh.hosts.*`
+
+*type:* attrset
+*corresponding option:* `home-manager.config.programs.ssh.matchBlocks`
+Optional; merged.
+
+My remote machines are none of your business.
+
+##### `config.time.timeZone`
+*type:*
 
 ### NixOS
 
 - NixOS
 - **NixOS conflaguration always utilizes home conflaguration as a module. Thus, all dependencies therein apply here too.**
-<!-- TODO: elaborate -->
-
-```
-# /etc/conflaguration/secret-settings.nix
-```
 
 ### Home
 
@@ -44,6 +70,7 @@ sudo nixos-rebuild switch --override-input secret-settings <secrets_path> \
 ### NixOS
 
 #### `my.username`
+
 *type:* string matching `/^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$/` \
 *default:* `"vrad"` \
 System username (anticipate change). Overrides `home-manager.config.home.username` (`mkForce`).
@@ -51,6 +78,7 @@ System username (anticipate change). Overrides `home-manager.config.home.usernam
 ### Home
 
 #### my.ssh.enableFishIntegration
+
 *type:* bool \
 *default:* `home.shell.enableFishIntegration` \
 Whether to enable our custom ssh-keychain-fish-shell integration.

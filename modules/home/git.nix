@@ -1,4 +1,4 @@
-{
+{ secret-settings }: {
   programs.git = {
     enable = true;
 
@@ -6,7 +6,7 @@
       # TODO: external diff/merge tools? integrate with nvim?
       user = {
         name = "freddyGiant";
-        email = "freddyGiant+notarealemail@vradford.com";
+        inherit (secret-settings.git) email;
       };
 
       core = {

@@ -23,7 +23,7 @@
         };
       }
 
-      secret-settings.hosts
+      secret-settings.ssh.hosts
     ];
 
     services.ssh-agent.enable = true;

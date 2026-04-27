@@ -15,11 +15,9 @@
     IconDownloadFallback = true;
   };
   programs.keepassxc.settings.FdoSecrets.Enable = true;
-  programs.keepassxc.settings.SSHAgent = lib.optionalAttrs
-    config.programs.ssh.enable
-    {
-      Enabled = true;
-      UseOpenSSH = true;
-    };
+  programs.keepassxc.settings.SSHAgent = lib.mkIf config.programs.ssh.enable {
+    Enabled = true;
+    UseOpenSSH = true;
+  };
 }
 

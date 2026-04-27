@@ -29,6 +29,8 @@
         inherit specialArgs;
         modules = [
           ./hosts/${hostname}/
+          # TODO: Consider adding lib
+          # TODO: consider optionality of secret-settings
           ./modules/nixos/
           { networking.hostName = hostname; };
 
