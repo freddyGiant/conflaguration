@@ -12,11 +12,14 @@ TODOs, FIXMEs, HACKs, NOTEs, and more exist throughout conflaguration.
 ## Installation
 
 Working in this directory, run the following in your preferred shell:
+
 ```bash
-sudo nixos-rebuild switch --override-input secret-settings <secrets_path> \
-  --experimental-features 'nix-command flakes'
+sudo nixos-rebuild switch \
+    --override-input secret-settings 'path:<settings_path>' \
+    --experimental-features 'nix-command flakes'
 ```
-...where `<secrets_path>` is the path to the directory containing your secret-settings flake.
+
+...where `<settings_path>` is the **absolute** path to the directory containing your secret-settings flake.
 
 ## Requirements
 
@@ -54,7 +57,8 @@ Optional; merged.
 My remote machines are none of your business.
 
 ##### `config.time.timeZone`
-*type:*
+*type:* string
+*corresponding option:* `config.time.timeZone`
 
 ### NixOS
 
