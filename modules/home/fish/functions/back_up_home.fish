@@ -6,5 +6,5 @@ rsync --verbose --recursive --relative --archive --copy-links \
   --exclude .local/state/nix \
   --exclude .local/state/home-manager \
   .local .zen .mozilla hm med projects sync \
-  backup/vrad/
+  "backup/$USER/"
 prevd
