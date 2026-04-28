@@ -1,11 +1,18 @@
-{ niri, ... }: {
+# https://github.com/sodiboo/niri-flake/blob/main/docs.md
+# https://github.com/sodiboo/niri-flake?tab=readme-ov-file
+{ config, niri, pkgs, ... }: {
   nixpkgs.overlays = [ niri.overlays.niri ];
+
+  programs.niri.enable = true;
+  niri-flake.cache.enable = false;
+  programs.niri.package = pkgs.niri;
+
+  programs.uwsm.enable = true;
+  programs.uwsm.waylandCompositors.niri.binPath = "${pkgs.niri}/bin/niri-session";
 
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  programs.niri.enable = true;
 }
