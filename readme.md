@@ -27,9 +27,8 @@ sudo nixos-rebuild switch \
 
 #### Secret Settings Flake
 
-!!! IMPORTANT !!!
-
-The flake must be constructed as described in this section and its absolute path passed to the installation command above. After running the installation command, subsequent rebuilds using the `nrs` and `nrt` Fish abbreviations will continue to use the path you passed.
+Construct the flake as described in this section and pass its *absolute* path to the installation command as shown above.
+After running the installation command, subsequent rebuilds using the `nrs` and `nrt` Fish abbreviations will continue to use the path you passed.
 
 This flake is NOT for authentication secrets. Conflaguration currently provides Keepassxc for that. It's for little tidbit settings that contain things that vaguely constitute PII.
 
@@ -37,28 +36,29 @@ Conflaguration expects **all** of these options to have values.
 
 ##### `outputs.path`
 
-*type:* path
-Set this to `./.`.
+*type:* path \
+Set this to `./.`. \
 
 ##### `outputs.git.email`
 
-*type:* string
-*corresponding option:* `home-manager.config.programs.git.settings.user.email`
+*type:* string \
+*corresponding option:* `home-manager.config.programs.git.settings.user.email` \
 The email used in git commits, which public online hosts (e.g. GitHub, Codeberg) typically use to associate commits with your account (matched against the emails you've added and/or verified in your online account settings).
 
 I don't want to accidentally give you my email.
 
 ##### `outputs.ssh.hosts.*`
 
-*type:* attrset
-*corresponding option:* `home-manager.config.programs.ssh.matchBlocks`
+*type:* attrset \
+*corresponding option:* `home-manager.config.programs.ssh.matchBlocks` \
 Optional; merged.
 
 My remote machines are none of your business.
 
 ##### `config.time.timeZone`
-*type:* string
-*corresponding option:* `config.time.timeZone`
+
+*type:* string \
+*corresponding option:* `config.time.timeZone` \
 
 ### NixOS
 
@@ -96,3 +96,4 @@ Whether to enable our custom ssh-keychain-fish-shell integration.
 - All configuration included by a nixosSystem as created by the flake should behave as if this is machine over which we have full, godlike control. Otherwise, we'd just be using home-manager!
 - Declaring attrs separately is often more readable-- only group them when they only make sense together.
   - the options and config attrsets are probably exceptions (esp. since the latter is optional)
+- The imperative mood is handy.
