@@ -12,6 +12,8 @@ let
   #
   #     Why isn't this documented better?
   functionBodiesFromFiles = builtins.mapAttrs (name: otherFunctionAttrs:
+  # TODO: write this nicer
+  # (like, why not use map?)
     {
       body = builtins.readFile ./${name}.fish;
     } // otherFunctionAttrs

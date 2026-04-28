@@ -47,6 +47,11 @@ do
   vim.keymap.set('n', [[n]],     [[nzzzv]])
   vim.keymap.set('n', [[N]],     [[Nzzzv]])
 
+  -- GREP
+  -- by default, do search gitignored files but don't search hidden files
+  -- (./.git is a pain)
+  vim.o.grepprg = [[rg --vimgrep -u]]
+
   -- FOLDS
   vim.o.foldlevel = 99
   -- vim.o.foldlevel = 2
