@@ -7,6 +7,7 @@
     ./home-manager.nix
     ./keyd.nix
     ./localsend.nix
+    # ./ly.nix
     ./networkmanager.nix
     ./niri.nix
     ./pipewire.nix
@@ -32,13 +33,10 @@
   security.rtkit.enable = true;
 
   i18n.defaultLocale = "C.UTF-8";
+  # TODO: separate by machine
   time.timeZone = secret-settings.timezone;
 
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canToughEfiVariables = true;
-
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
 
   # TODO: look into more settings like these
   boot.tmp.cleanOnBoot = true;
@@ -46,5 +44,4 @@
 
   config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "25.05";
 }
