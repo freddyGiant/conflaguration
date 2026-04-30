@@ -11,9 +11,9 @@
 #
 # - TODOs
 #   - plugin probably suffices?
-{
+{ config, lib, ... }: {
   imports = [
-    ./lsp.nix
+    ./lsp/
     ./plugins/
     ./treesitter.nix
   ];
@@ -25,5 +25,18 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
-  programs.neovim.extraLuaConfig = /* lua */ "doFile '${./default.lua}'";
+
+  # lib.neovim.order = lib.mkForce {
+  #   default = 1000;
+  #   treesitter = 2000;
+  #   lsp = 3000;
+  #   mkOtherPlugins = 8000;
+  # }
+
+  programs.neovim.extraLuaConfig = builtins.readFile ./default.lua;
+
+  lib.neovim.order = {
+    lsp = 3000;
+    mkLsp = lib.mkOrder config.lib.neovim.order.lsp;
+  };
 }
