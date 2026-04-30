@@ -2,8 +2,6 @@
   imports = [ ./hardware-configuration.nix ];
 
   logind.settings.Login.HandlePowerKey = "ignore";
-  # IT'S IMPORTANT that this option only be set on LUKS-encrypted machines
-  services.getty.autologinUser = config.my.username;
 
   boot.initrd.systemd.enable = true;
   # TODO: figure out wtf is happening here
@@ -23,6 +21,8 @@
 
   boot.initrd.kernelModules = [ "cryptd" ];
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
+  # IT'S IMPORTANT that this option only be set on LUKS-encrypted machines
+  services.getty.autologinUser = config.my.username;
 
   # === NO MAN'S LAND ===
 
