@@ -1,3 +1,4 @@
+# TODO: impermanence
 {
   imports = [
     ./bluetooth.nix
@@ -33,8 +34,6 @@
   security.rtkit.enable = true;
 
   i18n.defaultLocale = "C.UTF-8";
-  # TODO: separate by machine
-  time.timeZone = secret-settings.timezone;
 
   boot.loader.systemd-boot.enable = true;
 

@@ -1,3 +1,4 @@
+# TODO: Add disko
 { config, ... }: {
   imports = [ ./hardware-configuration.nix ];
 

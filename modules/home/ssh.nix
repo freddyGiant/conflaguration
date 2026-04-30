@@ -8,23 +8,19 @@
     programs.ssh.enable = true;
     # stupid
     programs.ssh.enableDefaultConfig = false;
-    programs.ssh.matchBlocks = lib.mkMerge [
-      {
-        "*" = {
-          forwardAgent = false;
-          hashKnownHosts = true;
-          extraOptions.RequestTTY = "yes";
+    programs.ssh.matchBlocks = {
+      "*" = {
+        forwardAgent = false;
+        hashKnownHosts = true;
+        extraOptions.RequestTTY = "yes";
 
-          controlMaster = "auto";
-          controlPath = "${final.home.homeDirectory}/.ssh/control/%r_%h_%p";
-          controlPersist = "10m";
-          serverAliveInterval = 15;
-          serverAliveCountMax = 3;
-        };
-      }
-
-      secret-settings.ssh.hosts
-    ];
+        controlMaster = "auto";
+        controlPath = "${final.home.homeDirectory}/.ssh/control/%r_%h_%p";
+        controlPersist = "10m";
+        serverAliveInterval = 15;
+        serverAliveCountMax = 3;
+      };
+    };
 
     services.ssh-agent.enable = true;
 

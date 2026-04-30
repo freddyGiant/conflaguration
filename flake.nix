@@ -21,6 +21,7 @@
     mkSystems = lib.mkMerge;
 
     specialArgs = {
+      # NOTE: should secret-settings be replaced with secretSettingsPath?
       inherit inputs niri secret-settings;
       conflagurationPath = ./.;
     };
@@ -28,11 +29,10 @@
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./hosts/${hostname}
-          # TODO: Consider adding lib
-          # TODO: consider optionality of secret-settings
-          ./modules/nixos
           { networking.hostName = hostname; }
+          ./hosts/${hostname}
+          ./modules/nixos
+          (secret-settings.module or {})
 
           home-manager.nixosModules.home-manager
         ];

@@ -1,13 +1,17 @@
-{ secret-settings }: {
+# { secret-settings }: {
+{
   programs.git = {
     enable = true;
 
     settings = {
       # TODO: external diff/merge tools? integrate with nvim?
-      user = {
-        name = "freddyGiant";
-        inherit (secret-settings.git) email;
-      };
+      # TODO: should this change?
+      user.name = "freddyGiant";
+
+      # user = {
+      #   name = "freddyGiant";
+      #   # inherit (secret-settings.git) email;
+      # };
 
       core = {
         # recall that this should be true for Windows users
