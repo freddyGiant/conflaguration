@@ -4,13 +4,13 @@
     ./todo-comments-nvim.nix
   ];
 
-  lib.neovim.plugins.configFromFile = pkgs: name: {
+  lib.neovim.plugins.fromFile = pkgs: name: {
     plugin = pkgs.vimPlugins.${name};
     type = "lua";
     config = builtins.readFile ./${name};
   };
 
-  programs.neovim.plugins = map config.lib.neovim.plugins.configFromFile [
+  programs.neovim.plugins = map config.lib.neovim.plugins.fromFile [
     "gruvbox-material-nvim"
     "blink-cmp"
   ];

@@ -1,13 +1,17 @@
 { pkgs, ... }: let
-  # [`nixpkgs.vimPlugins.nvim-treesitter.withPlugins`](https://github.com/NixOS/nixpkgs/blob/6295c384cf8034c5481ed1913063c59fc69756cd/pkgs/applications/editors/vim/plugins/nvim-treesitter/generated.nix)
+  #`nixpkgs.vimPlugins.nvim-treesitter.withPlugins`
   # will fetch the grammars packaged in
-  # [`nixpkgs.vimPlugins.nvim-treesitter-parsers.*`](https://github.com/NixOS/nixpkgs/blob/6295c384cf8034c5481ed1913063c59fc69756cd/pkgs/applications/editors/vim/plugins/nvim-treesitter/generated.nix),
-  # where `*` is each of the languages listed in the argument to this option.
+  #`nixpkgs.vimPlugins.nvim-treesitter-parsers.*`
+  # where `*` is each of the languages listed in the argument to this variable.
   #
   # Note that this is just the set of treesitter grammars that are supported by
   # nixpkgs *as Vim plugins*. There are plenty more grammars in nixpkgs (and
   # elsewhere) that can be trivially packaged into Vim plugins with
   # `nixpkgs.lib` functions.
+  #
+  # see
+  # https://github.com/NixOS/nixpkgs/blob/6295c384cf8034c5481ed1913063c59fc69756cd/pkgs/applications/editors/vim/plugins/nvim-treesitter/generated.nix
+  # https://github.com/NixOS/nixpkgs/blob/6295c384cf8034c5481ed1913063c59fc69756cd/pkgs/applications/editors/vim/plugins/nvim-treesitter/generated.nix
   grammars = [
     "bash"
     "c"
@@ -25,7 +29,7 @@
     /* experimental, for SML */ "ocaml"
   ];
   tsWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
-    map (g: p.g) grammars
+    map (g: p.${g}) grammars
   );
 in {
   programs.neovim.plugins = [
