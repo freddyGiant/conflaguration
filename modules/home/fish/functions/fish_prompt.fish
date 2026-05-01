@@ -1,4 +1,5 @@
 # TODO: show nix develop status
+# https://wiki.nixos.org/wiki/Fish#Show_that_you_are_in_a_nix-shell
 # do we need to set an env var in nix develop?
 # in the abbr, perhaps?
 
