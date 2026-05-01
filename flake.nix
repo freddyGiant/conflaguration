@@ -3,12 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    microvm = {
+      url = "github:microvm/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri.url = "github:sodiboo/niri-flake";
 
     # to be overriden
@@ -41,5 +44,6 @@
   in mkSystems
   [
     (mkNixos "tranticicero")
+    (mkNixos "homonculus")
   ];
 }
