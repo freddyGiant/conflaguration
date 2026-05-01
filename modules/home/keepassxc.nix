@@ -9,23 +9,29 @@
       MinimizeOnClose = true;
       ShowTrayIcon = true;
     };
-    # # incompatible with wayland as of 11-2025
-    # Browser.Enabled = true;
     programs.keepassxc.settings.Security = {
       ClearClipboardTimeout = 120;
       LockDatabaseIdleSeconds = 1800;
       IconDownloadFallback = true;
     };
+    # # incompatible with wayland as of 11-2025
+    # programs.keepassxc.settings.Browser.Enabled = true;
+    # https://github.com/nix-community/home-manager/blob/feda41500ec53fcd4e3131de7b0441bce08fd3e9/modules/programs/keepassxc.nix#L24
+    programs.keepassxc.settings.Browser.UpdateBinaryPath = false;
     # stubborn?
     programs.keepassxc.settings.FdoSecrets.Enable = true;
 
-    systemd.user.services.keepassxc = {
+    systemd.user.services."org.keepassxc.KeePassXC" = {
       Unit = {
         Description = "Modern, open-source password manager";
         Documentation = "man:keepassxc(1}";
-
-      }
-      Install.WantedBy = [ "graphical.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   }
 
@@ -35,10 +41,33 @@
       Enabled = true;
       UseOpenSSH = true;
     };
-    systemd.user.services.keepassxc.Unit = {
-      Wants = [ "ssh-agent.service" ];
-      After = [ "ssh-agent.service" ];
-      ReloadPropagatedFrom = [ "ssh-agent.service" ];
+
+    home.packages = [ pkgs.libnotify ];
+    systemd.user.services."org.keepassxc.KeePassXC" = {
+      Service.ExecStartPre = lib.getExe lib.writeShellApplication {
+        name = "keepassxc-check-ssh-auth-sock";
+        text = /* bash */ ''
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
+              'KeePassXC: SSH agent unavailable' \
+              'SSH_AUTH_SOCK is not set. Keys can'\''t be added.'
+
+            exit
+          fi
+
+          if [ ! -S "$SSH_AUTH_SOCK" ]; then
+            ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
+              'KeePassXC: SSH agent unavailable' \
+              "$SSH_AUTH_SOCK"' is not a valid socket. Keys can'\''t be added.'
+          fi
+        '';
+      };
+
+      Unit = {
+        Wants = [ "ssh-agent.service" ];
+        After = [ "ssh-agent.service" ];
+        ReloadPropagatedFrom = [ "ssh-agent.service" ];
+      };
     };
   })
 ])

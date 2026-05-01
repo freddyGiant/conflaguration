@@ -45,7 +45,7 @@
       text = let
         inherit (config.services.ssh-agent) socket;
       in /* bash */ ''
-        if [ -z "$SSH_AUTH_SOCK" -o -z "$SSH_CONNECTION" ]; then
+        if [ -z "$SSH_AUTH_SOCK" ] || [ -z "$SSH_CONNECTION" ]; then
           systemctl --user --set-environment \
             SSH_AUTH_SOCK=/run/user/"$(id -u)"/${socket}
         fi
