@@ -44,6 +44,13 @@
 
     home.packages = [ pkgs.libnotify ];
     systemd.user.services."org.keepassxc.KeePassXC" = {
+      Unit = {
+        Wants = [ "ssh-agent.service" ];
+        After = [ "ssh-agent.service" ];
+        ReloadPropagatedFrom = [ "ssh-agent.service" ];
+      };
+
+      # warn in event of $SSH_AUTH_SOCK not being available
       Service.ExecStartPre = lib.getExe lib.writeShellApplication {
         name = "keepassxc-check-ssh-auth-sock";
         text = /* bash */ ''
@@ -61,12 +68,6 @@
               "$SSH_AUTH_SOCK"' is not a valid socket. Keys can'\''t be added.'
           fi
         '';
-      };
-
-      Unit = {
-        Wants = [ "ssh-agent.service" ];
-        After = [ "ssh-agent.service" ];
-        ReloadPropagatedFrom = [ "ssh-agent.service" ];
       };
     };
   })
