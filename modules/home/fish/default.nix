@@ -20,7 +20,14 @@
     generateCompletions = true;
   };
 
-  # shellInitLast = lib.mkIf config.my.fish.emitInitEnd "emit init_end";
+  # from https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
+  programs.bash.initExtra = /* bash */ ''
+    if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    then
+      shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+      exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+    fi
+  '';
 
   # TODO: + bind (properly)
   # tried binding <TAB> to expand, but issues described below

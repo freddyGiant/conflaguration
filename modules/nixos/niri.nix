@@ -4,8 +4,8 @@
   nixpkgs.overlays = [ niri.overlays.niri ];
 
   programs.niri.enable = true;
-  niri-flake.cache.enable = false;
   programs.niri.package = pkgs.niri;
+  niri-flake.cache.enable = false;
 
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors.niri.binPath = "${pkgs.niri}/bin/niri-session";

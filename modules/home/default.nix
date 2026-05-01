@@ -50,6 +50,7 @@
   # let home-manager enable/restart systemd services as appropriate
   systemd.user.startServices = "sd-switch";
 
+  programs.home-manager.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
 }
