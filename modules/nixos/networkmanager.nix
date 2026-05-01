@@ -1,4 +1,3 @@
-# TODO: prioritize networks (secret?)
 { config, pkgs, ... }: {
   networking.networkmanager = {
     enable = true;

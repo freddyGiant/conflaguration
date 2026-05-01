@@ -4,10 +4,6 @@
 
   logind.settings.Login.HandlePowerKey = "ignore";
 
-  boot.initrd.systemd.enable = true;
-  # TODO: figure out wtf is happening here
-  systemd.dbus.enable = true;
-
   boot.loader.efi.canTouchEfiVariables = true;
   # where did these come from? don't remember
   boot.initrd.availableKernelModules = [
@@ -15,24 +11,22 @@
     "sd_mod" "usb_storage"
   ];
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+  };
 
-  # NECESSARY FOR ENCRYPTION
+  # DISK ENCRYPTION
 
-  boot.initrd.kernelModules = [ "cryptd" ];
+  boot.initrd.kernelModules = [ "cryptd" ]; # see above?
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
+  services.lvm.enable = true;
+  services.udisks2.enable = true; # TODO: what depends on this again?
   # IT'S IMPORTANT that this option only be set on LUKS-encrypted machines
   services.getty.autologinUser = config.my.username;
 
-  # === NO MAN'S LAND ===
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  # NOTE: reconsider when using systemd-networkd on servers?
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
 
   hardware.enableAllFirmware = true;
 
