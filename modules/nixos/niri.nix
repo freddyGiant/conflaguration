@@ -1,7 +1,7 @@
 # https://github.com/sodiboo/niri-flake/blob/main/docs.md
 # https://github.com/sodiboo/niri-flake?tab=readme-ov-file
-{ config, niri, pkgs, ... }: {
-  nixpkgs.overlays = [ niri.overlays.niri ];
+{ config, inputs, pkgs, ... }: {
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri;
