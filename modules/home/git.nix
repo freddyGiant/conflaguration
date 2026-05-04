@@ -1,4 +1,3 @@
-# { secret-settings }: {
 {
   programs.git = {
     enable = true;
@@ -7,11 +6,6 @@
       # TODO: external diff/merge tools? integrate with nvim?
       # TODO: should this change?
       user.name = "freddyGiant";
-
-      # user = {
-      #   name = "freddyGiant";
-      #   # inherit (secret-settings.git) email;
-      # };
 
       core = {
         # recall that this should be true for Windows users

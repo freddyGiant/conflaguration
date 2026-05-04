@@ -12,7 +12,7 @@
       extraGroups = [ "wheel" "input" "audio" "video" ];
     };
 
-    sudo.extraRules = [{
+    security.sudo.extraRules = [{
       users = [ config.my.username ];
       commands = [{
         command = "ALL";

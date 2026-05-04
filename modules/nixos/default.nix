@@ -1,7 +1,6 @@
 # TODO: impermanence
 {
   imports = [
-    ./fonts.nix
     ./home-manager.nix
     ./keyd.nix
     ./networkmanager.nix
@@ -51,9 +50,11 @@
 
   # SYSTEMD
   boot.loader.systemd-boot.enable = true;
-  boot.initrd.systemd.enable = true;
-  # TODO: figure out wtf is happening here
-  systemd.dbus.enable = true;
+  boot.initrd.systemd = {
+    enable = true;
+    # TODO: figure out wtf is happening here
+    dbus.enable = true;
+  };
   services.dbus.implementation = "broker";
 
   nixpkgs.config.allowUnfree = true;

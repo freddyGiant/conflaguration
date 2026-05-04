@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   # FIXME: white pages
-  service.printing = {
+  services.printing = {
     enable = true;
 
     browsed.enable = true;
@@ -12,7 +12,7 @@
     ];
   };
 
-  service.avahi = {
+  services.avahi = {
     enable = true;
     nssmdns4 = true;
     openFirewall = true;

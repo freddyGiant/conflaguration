@@ -2,7 +2,7 @@
 { config, lib, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  logind.settings.Login.HandlePowerKey = "ignore";
+  services.logind.settings.Login.HandlePowerKey = "ignore";
 
   boot.loader.efi.canTouchEfiVariables = true;
   # where did these come from? don't remember

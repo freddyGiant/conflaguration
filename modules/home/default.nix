@@ -2,6 +2,7 @@
   imports = [
     ./directories.nix
     ./fish/
+    ./fonts.nix
     ./git.nix
     ./keepassxc.nix
     ./neovim/
