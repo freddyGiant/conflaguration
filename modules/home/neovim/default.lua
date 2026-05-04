@@ -356,6 +356,7 @@ do
 end
 
 -- POP-UP TERMINAL
+-- TODO: make tab directory dependent?
 vim.keymap.set('n', [[<LEADER>t]], function()
   vim.cmd('botright 10split')
 

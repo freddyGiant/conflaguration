@@ -4,10 +4,10 @@
     ./todo-comments-nvim.nix
   ];
 
-  lib.neovim.plugins.fromFile = pkgs: name: {
+  lib.neovim.plugins.fromFile = name: {
     plugin = pkgs.vimPlugins.${name};
     type = "lua";
-    config = builtins.readFile ./${name};
+    config = builtins.readFile ./${name}.lua;
   };
 
   programs.neovim.plugins = map config.lib.neovim.plugins.fromFile [
