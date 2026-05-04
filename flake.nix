@@ -31,9 +31,9 @@
         modules = [
           { networking.hostName = hostname; }
           ./hosts/${hostname}
-          ./modules/nixos
-          (secret-settings.module or {})
 
+          ./modules/nixos
+          (secret-settings.nixosModule or {})
           home-manager.nixosModules.home-manager
         ];
       };
