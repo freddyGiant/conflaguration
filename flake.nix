@@ -22,7 +22,7 @@
 
     specialArgs = {
       # NOTE: should secret-settings be replaced with secretSettingsPath?
-      inherit inputs secret-settings;
+      inherit inputs;
       conflagurationPath = ./.;
     };
     mkNixos = hostname: {
