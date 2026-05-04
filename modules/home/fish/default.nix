@@ -1,6 +1,6 @@
 { config, ... }: {
   imports = [
-    ./functions/
+    ./functions
     ./abbrs.nix
   ];
 

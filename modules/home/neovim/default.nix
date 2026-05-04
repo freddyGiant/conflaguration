@@ -13,8 +13,8 @@
 #   - plugin probably suffices?
 { config, lib, ... }: {
   imports = [
-    ./lsp/
-    ./plugins/
+    ./lsp
+    ./plugins
     ./treesitter.nix
   ];
 

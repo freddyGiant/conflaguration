@@ -1,11 +1,11 @@
 { lib, pkgs, ... }: {
   imports = [
     ./directories.nix
-    ./fish/
+    ./fish
     ./fonts.nix
     ./git.nix
     ./keepassxc.nix
-    ./neovim/
+    ./neovim
     ./niri.nix
     ./ssh.nix
     ./tex.nix
