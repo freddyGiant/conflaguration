@@ -15,10 +15,10 @@
     secret-settings.url = "";
   };
 
-  outputs = { nixpkgs, home-manager, niri, secret-settings, ... } @ inputs: let
+  outputs = { nixpkgs, home-manager, secret-settings, ... } @ inputs: let
     lib = nixpkgs.lib;
 
-    mkSystems = lib.mkMerge;
+    mkSystems = builtins.foldl' lib.recursiveUpdate {};
 
     specialArgs = {
       # NOTE: should secret-settings be replaced with secretSettingsPath?
@@ -41,5 +41,6 @@
   in mkSystems
   [
     (mkNixos "tranticicero")
+    (mkNixos "homonculus")
   ];
 }

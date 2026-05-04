@@ -56,6 +56,6 @@
   systemd.dbus.enable = true;
   services.dbus.implementation = "broker";
 
-  config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }

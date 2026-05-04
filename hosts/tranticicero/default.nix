@@ -1,5 +1,5 @@
 # TODO: Add disko
-{ config, ... }: {
+{ config, lib, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   logind.settings.Login.HandlePowerKey = "ignore";
@@ -24,6 +24,15 @@
   services.udisks2.enable = true; # TODO: what depends on this again?
   # IT'S IMPORTANT that this option only be set on LUKS-encrypted machines
   services.getty.autologinUser = config.my.username;
+
+  virtualisation.vmVariant = {
+    virtualisation.memorySize = 2048;
+    virtualisation.cores = 4;
+    virtualisation.qemu.options = [ "-vga virtio" "-display sdl,gl=on" ];
+    networking.firewall.allowedTCPPorts = [ 22 ];
+  };
+
+  hardware.opengl.enable = true;
 
   # NOTE: reconsider when using systemd-networkd on servers?
   networking.useDHCP = lib.mkDefault true;
