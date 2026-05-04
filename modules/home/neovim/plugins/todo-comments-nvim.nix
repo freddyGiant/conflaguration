@@ -4,5 +4,4 @@
 
     pkgs.vimPlugins.plenary-nvim # dependency
   ];
-};
-
+}

@@ -26,8 +26,11 @@
     ];
   };
 
-  programs.fish.shellAbbrs.g = "git";
-  programs.fish.shellAbbrs = mapAttrs (_: expansion: {
+  # TODO: cleaner?
+  # programs.fish.shellAbbrs.g = "git";
+  programs.fish.shellAbbrs = {
+    g = "git";
+  } // (builtins.mapAttrs (_: expansion: {
     command = "git";
     inherit expansion;
   }) {
@@ -43,5 +46,5 @@
     rv  = "revert --no-commit";
     st  = "status";
     sw  = "switch";
-  };
+  });
 }

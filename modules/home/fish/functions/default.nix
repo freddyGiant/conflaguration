@@ -22,7 +22,7 @@ in {
   programs.fish.functions = functionBodiesFromFiles {
     # TODO: fish greeting
     fish_prompt = {};
-    fish_user_key_bindings = {}
+    fish_user_key_bindings = {};
 
     back_up_home = {};
   };

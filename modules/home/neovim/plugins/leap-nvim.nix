@@ -4,5 +4,4 @@
 
     pkgs.vimPlugins.vim-repeat # dependency
   ];
-};
-
+}

@@ -1,4 +1,4 @@
-{ config, lib, ... }: (lib.mkMerge [
+{ config, lib, pkgs, ... }: (lib.mkMerge [
   {
     programs.keepassxc.enable = true;
     programs.keepassxc.settings.General.BackupBeforeSave = true;
@@ -35,7 +35,7 @@
     };
   }
 
-  (lib.mkIf services.ssh-agent.enable {
+  (lib.mkIf config.services.ssh-agent.enable {
     # requires that SSH_AUTH_SOCK be properly initialized; see ./ssh.nix
     programs.keepassxc.settings.SSHAgent = {
       Enabled = true;
@@ -51,13 +51,15 @@
       };
 
       # warn in event of $SSH_AUTH_SOCK not being available
+      # including escaped single quotes in single-quoted strings *in* double-single-quoted nix strings is... as bad as it sounds
+      # https://nix.dev/manual/nix/2.26/language/string-literals
       Service.ExecStartPre = lib.getExe lib.writeShellApplication {
         name = "keepassxc-check-ssh-auth-sock";
         text = /* bash */ ''
           if [ -z "$SSH_AUTH_SOCK" ]; then
             ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
               'KeePassXC: SSH agent unavailable' \
-              'SSH_AUTH_SOCK is not set. Keys can'\''t be added.'
+              "SSH_AUTH_SOCK is not set. Keys can't be added."
 
             exit
           fi
@@ -65,7 +67,7 @@
           if [ ! -S "$SSH_AUTH_SOCK" ]; then
             ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
               'KeePassXC: SSH agent unavailable' \
-              "$SSH_AUTH_SOCK"' is not a valid socket. Keys can'\''t be added.'
+              "$SSH_AUTH_SOCK is not a valid socket. Keys can't be added."
           fi
         '';
       };
