@@ -1,3 +1,4 @@
+# TODO: ghostty-neovim-yazi
 { lib, pkgs, ... }: {
   imports = [
     ./directories.nix

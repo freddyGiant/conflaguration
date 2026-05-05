@@ -1,4 +1,4 @@
-{ conflagurationPath, secret-settings, ... }: let
+{ conflagurationPath, inputs, ... }: let
   # could consider adding something more generalized, but that isn't needed for now
   subcommand = command: expansion: { inherit command expansion; };
 in {
@@ -21,12 +21,12 @@ in {
     nrt = ''
       sudo nixos-rebuild test \
         --flake ${conflagurationPath} \
-        --override-input secret-settings ${secret-settings.path}
+        --override-input secret-settings ${inputs.secret-settings.path}
     '';
     nrs = ''
       sudo nixos-rebuild switch \
         --flake ${conflagurationPath} \
-        --override-input secret-settings ${secret-settings.path}
+        --override-input secret-settings ${inputs.secret-settings.path}
     '';
 
     fl = subcommand "nix" "flake";

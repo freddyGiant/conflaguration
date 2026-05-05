@@ -53,9 +53,10 @@
       # warn in event of $SSH_AUTH_SOCK not being available
       # including escaped single quotes in single-quoted strings *in* double-single-quoted nix strings is... as bad as it sounds
       # https://nix.dev/manual/nix/2.26/language/string-literals
-      Service.ExecStartPre = lib.getExe lib.writeShellApplication {
+      Service.ExecStartPre = lib.getExe (pkgs.writeShellApplication {
         name = "keepassxc-check-ssh-auth-sock";
         text = /* bash */ ''
+          # if string not empty, i.e. if var is set (to nonempty string)
           if [ -z "$SSH_AUTH_SOCK" ]; then
             ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
               'KeePassXC: SSH agent unavailable' \
@@ -64,13 +65,14 @@
             exit
           fi
 
+          # if file at this dir exists (and is not some dummy file)
           if [ ! -S "$SSH_AUTH_SOCK" ]; then
             ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
               'KeePassXC: SSH agent unavailable' \
               "$SSH_AUTH_SOCK is not a valid socket. Keys can't be added."
           fi
         '';
-      };
+      });
     };
   })
 ])

@@ -1,4 +1,4 @@
-{ config, inputs, ... }: {
+{ config, conflagurationPath, inputs, ... }: {
   # including home config as a module, passing down necessary system config
   home-manager.users.${config.my.username} = { lib, ... }: {
     imports = [
@@ -11,6 +11,6 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit conflagurationPath inputs; };
   };
 }

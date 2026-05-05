@@ -8,7 +8,10 @@
   # niri-flake.cache.enable = false;
 
   programs.uwsm.enable = true;
-  programs.uwsm.waylandCompositors.niri.binPath = "${pkgs.niri}/bin/niri-session";
+  programs.uwsm.waylandCompositors.niri = {
+    prettyName = "niri (UWSM)";
+    binPath = "${pkgs.niri}/bin/niri-session";
+  };
 
   # xdg.portal = {
   #   enable = true;

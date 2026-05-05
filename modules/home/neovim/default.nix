@@ -25,6 +25,8 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
+  programs.neovim.withRuby = false; # stateVersion 25.11
+  programs.neovim.withPython3 = false; # stateVersion 25.11
 
   # lib.neovim.order = lib.mkForce {
   #   default = 1000;
@@ -33,7 +35,7 @@
   #   mkOtherPlugins = 8000;
   # }
 
-  programs.neovim.extraLuaConfig = builtins.readFile ./default.lua;
+  programs.neovim.initLua = builtins.readFile ./default.lua;
 
   lib.neovim.order = {
     lsp = 3000;

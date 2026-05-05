@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, lib, ... }: {
   virtualisation.vmVariant = {
     virtualisation.memorySize = 2048;
     virtualisation.cores = 4;

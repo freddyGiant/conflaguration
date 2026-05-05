@@ -41,7 +41,7 @@
   # https://github.com/nix-community/home-manager/blob/8ec5a714dbbeb3fda00bd9758175555ebbad4d07/modules/misc/ssh-auth-sock.nix#L26
   # https://github.com/nix-community/home-manager/blob/8ec5a714dbbeb3fda00bd9758175555ebbad4d07/modules/services/ssh-agent.nix#L30
   systemd.user.services.ssh-agent.Service.ExecStartPost =
-    lib.getExe lib.writeShellApplication {
+    lib.getExe (pkgs.writeShellApplication {
       name = "systemd-ssh-auth-sock";
       # composed from ssh-agent, ssh-auth-sock modules and with other
       # references for systemd unit configuration
@@ -53,7 +53,7 @@
             SSH_AUTH_SOCK=/run/user/"$(id -u)"/${socket}
         fi
       '';
-    };
+    });
 
   programs.fish.shellAbbrs.shit = "ssh -t";
   # M necessary?

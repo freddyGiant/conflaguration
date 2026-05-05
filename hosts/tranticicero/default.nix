@@ -32,7 +32,7 @@
     networking.firewall.allowedTCPPorts = [ 22 ];
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # NOTE: reconsider when using systemd-networkd on servers?
   networking.useDHCP = lib.mkDefault true;

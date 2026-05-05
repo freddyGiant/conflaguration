@@ -2,7 +2,7 @@
   mkBeforeLsp = lib.mkOrder (config.lib.neovim.order.lsp - 500);
 in {
   programs.neovim.plugins = [ pkgs.vimPlugins.nvim-lspconfig ];
-  programs.neovim.extraLuaConfig = mkBeforeLsp /* lua */ ''
+  programs.neovim.initLua = mkBeforeLsp /* lua */ ''
     -- NVIM-LSPCONFIG
     vim.lsp.config('*', { root_markers = { '.git' }, })
 

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   home.packages = [ pkgs.lua-language-server ];
-  programs.neovim.extraLuaConfig = config.lib.neovim.order.mkLsp /* lua */ ''
+  programs.neovim.initLua = config.lib.neovim.order.mkLsp /* lua */ ''
     -- from comments in nvim-lspconfig/lsp/lua_ls.lua
     vim.lsp.config('lua_ls', {
       on_init = function(client)

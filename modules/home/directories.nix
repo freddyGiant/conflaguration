@@ -1,5 +1,6 @@
-{ config, ... }: {
-  home.homeDirectory = /home/${config.home.username};
+{ config, lib, ... }: {
+  # what else is setting this?? oh well
+  home.homeDirectory = lib.mkForce /home/${config.home.username};
 
   xdg.enable = true;
   xdg.userDirs = {
@@ -14,4 +15,7 @@
     publicShare  = /${config.home.homeDirectory}/public;
     templates    = /${config.home.homeDirectory}/templates;
   };
+  # old value
+  # TODO: would disabling this break stuff?
+  xdg.userDirs.setSessionVariables = true;
 }
