@@ -41,6 +41,5 @@
   in mkSystems
   [
     (mkNixos "tranticicero")
-    (mkNixos "homonculus")
   ];
 }
