@@ -9,7 +9,7 @@
 
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors.niri = {
-    prettyName = "niri (UWSM)";
+    prettyName = "Niri";
     binPath = "${pkgs.niri}/bin/niri-session";
   };
 

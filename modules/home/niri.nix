@@ -16,7 +16,7 @@
   then
     /* bash */ ''
       if uwsm check may-start; then
-        exec uwsm start niri-session-uwsm.desktop
+        exec uwsm start niri-uwsm.desktop
       fi
     ''
   else
@@ -30,6 +30,16 @@
         exec niri-session
       fi
     '');
+
+  # programs.bash.profileExtra = /* bash */ ''
+  #   if command -v uwsm; then
+  #     if uwsm check may-start && uwsm select; then
+  #       exec uwsm start default
+  #     fi
+  #   else
+  #     exec niri-session
+  #   fi
+  # '';
 
   systemd.user.sessionVariables.NIXOS_OZONE_WL = "1";
 
