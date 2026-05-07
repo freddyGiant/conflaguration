@@ -15,11 +15,13 @@ Working in this directory, run the following in your preferred shell:
 
 ```bash
 sudo nixos-rebuild switch \
+    --flake '.#<hostname>' \
     --override-input secret-settings 'path:<settings_path>' \
     --experimental-features 'nix-command flakes'
 ```
+...where `<hostname>` is the hostname corresponding to your desired configuration and `<settings_path>` is the **absolute** path to the directory containing your secret-settings flake.
 
-...where `<settings_path>` is the **absolute** path to the directory containing your secret-settings flake.
+To build the configuration as a virtual machine, try `build-vm` instead of `switch`. Subsequently, follow the given instructions to run it (although, whatever it says, you can probably run `result/bin/run-<hostname>-vm`.
 
 ## Requirements
 
