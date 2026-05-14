@@ -16,16 +16,17 @@ in {
     # nix abbrs
 
     "+" = "nix shell nixpkgs#";
-    # FIXME: use correct paths
+    # FIXME: conflaguration path is incorrect
     # NOTE: if we used ./. here it would be the store path (i.e., the already-active config)
+    # TODO: add nrvm
     nrt = ''
       sudo nixos-rebuild test \
-        --flake ${conflagurationPath} \
+        --flake ${inputs.secret-settings.conflagurationPath} \
         --override-input secret-settings ${inputs.secret-settings.path}
     '';
     nrs = ''
       sudo nixos-rebuild switch \
-        --flake ${conflagurationPath} \
+        --flake ${inputs.secret-settings.conflagurationPath} \
         --override-input secret-settings ${inputs.secret-settings.path}
     '';
 

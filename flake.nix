@@ -20,11 +20,7 @@
 
     mkSystems = builtins.foldl' lib.recursiveUpdate {};
 
-    specialArgs = {
-      # NOTE: should secret-settings be replaced with secretSettingsPath?
-      inherit inputs;
-      conflagurationPath = ./.;
-    };
+    specialArgs = { inherit inputs; };
     mkNixos = hostname: {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
