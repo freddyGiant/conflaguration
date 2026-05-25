@@ -5,8 +5,8 @@
     ./keyd.nix
     ./networkmanager.nix
     ./niri.nix
-    ./printing.nix
-    ./steam.nix
+    # ./printing.nix
+    # ./steam.nix
     ./user.nix
   ];
 

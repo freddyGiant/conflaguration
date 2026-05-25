@@ -1,17 +1,17 @@
 # TODO: ghostty-neovim-yazi
 { lib, pkgs, ... }: {
   imports = [
-    ./directories.nix
-    ./fish
-    ./fonts.nix
-    ./git.nix
-    ./keepassxc.nix
-    ./neovim
+    # ./directories.nix
+    # ./fish
+    # ./fonts.nix
+    # ./git.nix
+    # ./keepassxc.nix
+    # ./neovim
     ./niri.nix
-    ./ssh.nix
-    ./tex.nix
-    ./trash.nix
-    ./tree.nix
+    # ./ssh.nix
+    # ./tex.nix
+    # ./trash.nix
+    # ./tree.nix
   ];
 
   home.username = lib.mkDefault "vrad";
