@@ -13,6 +13,8 @@
   };
 
   # TODO: consider whether fish should really be set as a default shell, or just as a default terminal shell
+  # also, what about ttys?
+
   # # from https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
   # programs.bash.initExtra = /* bash */ ''
   #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
