@@ -28,7 +28,11 @@
   virtualisation.vmVariant = {
     virtualisation.memorySize = 2048;
     virtualisation.cores = 4;
-    virtualisation.qemu.options = [ "-vga virtio" "-display sdl,gl=on" ];
+    virtualisation.qemu.options = [
+      "-device virtio-vga-gl"
+      "-display sdl,gl=on"
+      "-vga virtio"
+    ];
     networking.firewall.allowedTCPPorts = [ 22 ];
   };
 
