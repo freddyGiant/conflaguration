@@ -10,25 +10,25 @@
     # ./user.nix
   ];
 
-  # GENERAL PROGRAMS
-  # programs.fish.enable = true;
-  programs.localsend = {
-    enable = true;
-    openFirewall = true;
-  };
-  programs.partition-manager.enable = true;
-
-  # AUDIO
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  # BLUETOOTH
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  # # GENERAL PROGRAMS
+  # # programs.fish.enable = true;
+  # programs.localsend = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
+  # programs.partition-manager.enable = true;
+  #
+  # # AUDIO
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  # };
+  #
+  # # BLUETOOTH
+  # hardware.bluetooth.enable = true;
+  # services.blueman.enable = true;
 
   # SYSTEM CLEANUP
   # TODO: look into more settings like these
