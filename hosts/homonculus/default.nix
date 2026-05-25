@@ -6,8 +6,10 @@
     virtualisation.memorySize = 2048;
     virtualisation.cores = 4;
     virtualisation.qemu.options = [
-      "-device virtio-vga-gl"
-      "-display sdl,gl=on"
+      # "-device virtio-vga-gl"
+      "-device virtio-vga"
+      # "-display sdl,gl=on"
+      "-display sdl"
       "-vga virtio"
     ];
 
