@@ -7,7 +7,7 @@
     ./niri.nix
     # ./printing.nix
     # ./steam.nix
-    # ./user.nix
+    ./user.nix
   ];
 
   # # GENERAL PROGRAMS
