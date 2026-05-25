@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ config, lib, ... }: {
   virtualisation.vmVariant = {
     # dangerous option
     services.getty.autologinUser = config.my.username;
