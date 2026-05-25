@@ -6,14 +6,14 @@
     virtualisation.memorySize = 2048;
     virtualisation.cores = 4;
     virtualisation.qemu.options = [
-      # "-device virtio-vga-gl"
-      "-device virtio-vga"
-      # "-display sdl,gl=on"
-      "-display sdl"
-      "-vga virtio"
+      "-device virtio-vga-gl"
+      # "-device virtio-vga"
+      "-display sdl,gl=on"
+      # "-display sdl"
+      # "-vga virtio"
     ];
 
-    # hardware.graphics.enable = true;
+    hardware.graphics.enable = true;
     networking.firewall.allowedTCPPorts = [ 22 ];
 
     boot.loader.systemd-boot.enable = true;
