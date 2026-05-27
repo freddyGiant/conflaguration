@@ -21,4 +21,6 @@
     monospace = [ "JetBrainsMono NFM" ];
     sansSerif = [ "open-sans" ];
   };
+
+  programs.foot.settings.main.font = "JetBrainsMono NFM:size=8";
 }
