@@ -4,6 +4,7 @@
     ./directories.nix
     ./fish
     ./fonts.nix
+    ./foot.nix
     ./git.nix
     ./keepassxc.nix
     ./neovim
