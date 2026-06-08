@@ -7,10 +7,7 @@
     virtualisation.cores = 4;
     virtualisation.qemu.options = [
       "-device virtio-vga-gl"
-      # "-device virtio-vga"
       "-display sdl,gl=on"
-      # "-display sdl"
-      # "-vga virtio"
     ];
 
     hardware.graphics.enable = true;
