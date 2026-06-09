@@ -9,6 +9,7 @@
     ./keepassxc.nix
     ./neovim
     ./niri.nix
+    ./pipewire.nix
     ./ssh.nix
     ./tex.nix
     ./trash.nix
