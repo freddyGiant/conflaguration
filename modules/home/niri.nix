@@ -34,7 +34,7 @@
         if uwsm check may-start && uwsm select; then
           exec uwsm start default
         fi
-      else
+      else if [ "$(tty)" = "/dev/tty1" ]; then
         exec niri-session
       fi
     '');
