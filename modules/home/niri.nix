@@ -4,6 +4,14 @@
 { inputs, lib, osConfig ? {}, pkgs, ... }: {
   imports = [ inputs.niri.homeModules.niri ];
 
+  lib.niri.asUnit = args:
+    # if uwsm not enabled or osConfig doesn't exist
+    if !osConfig.programs.uwsm.enable or true then
+      { action.spawn = args; }
+    else
+      { action.spawn = [ "uwsm" "app" "--" ] ++ args; };
+
+  # programs.niri.settings.
   programs.niri.settings.binds = {
     "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
     "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
