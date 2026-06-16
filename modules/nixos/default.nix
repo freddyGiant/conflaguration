@@ -10,13 +10,20 @@
     ./user.nix
   ];
 
-  # GENERAL PROGRAMS
   # programs.fish.enable = true;
   programs.localsend = {
     enable = true;
     openFirewall = true;
   };
+
+  # allows for emoji and other fonts
+  fonts.fontconfig.useEmbeddedBitmaps = true;
+
   programs.partition-manager.enable = true;
+
+  # BLUETOOTH
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # AUDIO
   services.pipewire = {
@@ -25,10 +32,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  # BLUETOOTH
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   # SYSTEM CLEANUP
   # TODO: look into more settings like these
