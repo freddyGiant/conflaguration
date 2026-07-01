@@ -14,7 +14,7 @@
       extraOptions.RequestTTY = "yes";
 
       controlMaster = "auto";
-      controlPath = "${config.home.homeDirectory}/.ssh/control/%r_%h_%p";
+      controlPath = "${config.home.homeDirectory}/.ssh/sockets/%r_%h_%p";
       controlPersist = "10m";
       serverAliveInterval = 15;
       serverAliveCountMax = 3;
