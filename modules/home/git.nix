@@ -23,6 +23,8 @@
     ignores = [
       "vrad.*"
       ".DS_Store"
+      ".direnv"
+      ".envrc"
     ];
   };
 
