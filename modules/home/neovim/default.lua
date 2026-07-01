@@ -1,3 +1,4 @@
+-- TODO: scratch buffers
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
@@ -86,6 +87,8 @@ do
   vim.o.splitright = true
   vim.o.splitbelow = true
   vim.o.equalalways = false
+  -- TODO: decide whether we want A- commands
+  -- TODO: make it work in terminals
   vim.keymap.set('n', [[<A-h>]], [[<C-w>h]])
   vim.keymap.set('n', [[<A-j>]], [[<C-w>j]])
   vim.keymap.set('n', [[<A-k>]], [[<C-w>k]])

@@ -38,7 +38,7 @@ in {
       type = "lua";
       config = /* lua */ ''
         -- NVIM-TREESITTER
-        require('nvim-treesitter.configs').setup {
+        require('nvim-treesitter').setup {
           auto_install = false, -- managed by Nix
 
           highlight = { enable = true, },

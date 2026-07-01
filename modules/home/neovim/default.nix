@@ -28,13 +28,6 @@
   programs.neovim.withRuby = false; # stateVersion 25.11
   programs.neovim.withPython3 = false; # stateVersion 25.11
 
-  # lib.neovim.order = lib.mkForce {
-  #   default = 1000;
-  #   treesitter = 2000;
-  #   lsp = 3000;
-  #   mkOtherPlugins = 8000;
-  # }
-
   programs.neovim.initLua = builtins.readFile ./default.lua;
 
   lib.neovim.order = {
