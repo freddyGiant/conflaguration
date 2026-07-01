@@ -2,6 +2,7 @@
 { lib, pkgs, ... }: {
   imports = [
     ./directories.nix
+    ./direnv.nix
     ./fish
     ./fonts.nix
     ./foot.nix
@@ -23,6 +24,8 @@
   # although, consider moving some to with wm?
   # TODO: think about this...
   home.packages = with pkgs; [
+    man-pages
+
     # cli, or small utility
     brightnessctl
     killall
