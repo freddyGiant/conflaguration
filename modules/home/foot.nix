@@ -9,6 +9,4 @@
   programs.foot.server.enable = true;
 
   programs.niri.settings.binds."Mod+T".action.spawn = [ "footclient" ];
-
-  programs.niri.settings.spawn-at-startup = [ { argv = [ "footclient" ]; } ];
 }

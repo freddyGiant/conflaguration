@@ -4,6 +4,10 @@
 { inputs, lib, osConfig ? {}, pkgs, ... }: {
   imports = [ inputs.niri.homeModules.niri ];
 
+  programs.niri.settings.binds = {
+    "Mod+Shift+Slash".action.show-hotkey-overlay = [];
+  };
+
   programs.bash = {
     enable = true; # lol
     profileExtra = /* bash */ "exec niri-session";
