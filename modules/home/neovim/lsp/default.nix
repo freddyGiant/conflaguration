@@ -4,6 +4,8 @@ in {
   programs.neovim.plugins = [ pkgs.vimPlugins.nvim-lspconfig ];
   programs.neovim.initLua = mkBeforeLsp /* lua */ ''
     -- NVIM-LSPCONFIG
+    -- TODO: type annotations
+    -- https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
     vim.lsp.config('*', { root_markers = { '.git' }, })
 
     local group = vim.api.nvim_create_augroup('vrad.lsp.on_attach', {})

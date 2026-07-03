@@ -1,4 +1,6 @@
 # TODO:
+# - CONSIDER an organization scheme that puts each language in its own file
+#   - can use options for initlua and such so we don't have to export all those ordering functions
 # - prosemode
 #   - \- => en dash (en dash)- => em dash
 #   - wrapping?
