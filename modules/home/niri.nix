@@ -1,17 +1,13 @@
 # https://github.com/sodiboo/niri-flake/blob/main/docs.md
 # https://github.com/sodiboo/niri-flake?tab=readme-ov-file
 # top ten least favorite nix syntax choices
-{ inputs, lib, osConfig ? {}, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [ inputs.niri.homeModules.niri ];
-
   programs.niri.settings.binds = {
     "Mod+Shift+Slash".action.show-hotkey-overlay = [];
   };
 
-  programs.bash = {
-    enable = true; # lol
-    profileExtra = /* bash */ "exec niri-session";
-  };
+  programs.niri.enable = true;
 
   xdg.portal = {
     enable = true;

@@ -11,6 +11,14 @@
   # programs.niri.package = pkgs.niri;
   # niri-flake.cache.enable = false;
 
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${config.programs.niri.package}/bin/niri-session";
+      user = config.my.username;
+    };
+  };
+
   # xdg.portal = {
   #   enable = true;
   #   xdgOpenUsePortal = true;
