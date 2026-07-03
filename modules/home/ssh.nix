@@ -21,6 +21,10 @@
     };
   };
 
+  programs.fish.shellAbbrs.ssh = "ssh -S none";
+  # M necessary?
+  programs.fish.shellAbbrs.ssm = "ssh -MNTf";
+
   # NOTE: unfortunately, this adds a weird conditional to all your shell init
   # scripts, but it's pretty inconsequential. See the home-manager repo for
   # more
@@ -54,8 +58,4 @@
         fi
       '';
     });
-
-  programs.fish.shellAbbrs.shit = "ssh -t";
-  # M necessary?
-  programs.fish.shellAbbrs.shbg = "ssh -MNTf";
 }
