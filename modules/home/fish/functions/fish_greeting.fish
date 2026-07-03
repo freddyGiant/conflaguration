@@ -1,6 +1,6 @@
 # https://www.asciiart.eu/art/5cbdf6e95fc805f7
 # one pixel offset on first line due to '
-printf \
+set -l message_day \
 '           ^^                  @@@@@@@@@
       ^^       ^^           @@@@@@@@@@@@@@@
                            @@@@@@@@@@@@@@@@@              ^^
@@ -12,4 +12,16 @@ printf \
 ~  ~       ~ ~      ~          ~~ ~~~~~~  ~      ~~  ~             ~~
       ~             ~       ~      ~      ~~   ~             ~
 peter bier (pjb), modified
+'
+
+set -l message_night \
+'        _    .  ,   .     stay strong,
+    *  / \_ *  / \_      _ my beloved.   /\'__        *
+      /    \  /    \,   ((        .    _/  /  \  *'.
+ .   /\/\  /\/ :' __ \_  `          _^/  ^/    `--.
+    /    \/  \  _/  \-'\      *    /.' ^_   \_   .'\  *
+  /\  .-   `. \/     \ /==~=-=~=-=-;.  _/ \ -. `_/   \
+ /  `-.__ ^   / .-'.--\ =-=~_=-=~=^/  _ `--./ .-'  `-
+/        `.  / /       `.~-^=-=~=^=.-'      '-._ `._
+jgs, modified
 '
