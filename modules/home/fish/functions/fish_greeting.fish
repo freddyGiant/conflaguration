@@ -9,5 +9,5 @@ printf '
   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~ 
 ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
       ~             ~        ~      ~      ~~   ~             ~
-―most likely pjb, modified from asciiart.eu
+most likely pjb, modified from asciiart.eu
 '
