@@ -8,12 +8,7 @@
 
   programs.foot.server.enable = true;
 
-  # programs.niri.settings.binds."Mod+T".action.spawn =
-  #   if osConfig.programs.uwsm.enable or false then
-  #     [ "uwsm" "app" "--" "footclient" ]
-  #   else
-  #     [ "footclient" ];
+  programs.niri.settings.binds."Mod+T".action.spawn = [ "footclient" ];
 
-  programs.niri.settings.binds."Mod+T" =
-    config.lib.niri.asUnit [ "footclient" ];
+  programs.niri.settings.spawn-at-startup = [ { argv = [ "footclient" ]; } ];
 }

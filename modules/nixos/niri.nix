@@ -1,3 +1,7 @@
+# NOTE: niri hardly benefits from UWSM at all.
+# In systemd mode (e.g. launched with `niri-session`), it already wraps any
+# launch commands as proper systemd units.
+# Otherwise, if you want proper daemons and control, write a systemd service.
 { config, /* inputs, */ pkgs, ... }: {
   # imports = [ inputs.niri.nixosModules.niri ];
   # uncomment if we want to switch to sodiboo's more up-to-date binary cache
@@ -6,12 +10,6 @@
   programs.niri.enable = true;
   # programs.niri.package = pkgs.niri;
   # niri-flake.cache.enable = false;
-
-  programs.uwsm.enable = true;
-  programs.uwsm.waylandCompositors.niri = {
-    prettyName = "Niri";
-    binPath = "${pkgs.niri}/bin/niri-session";
-  };
 
   # xdg.portal = {
   #   enable = true;

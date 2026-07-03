@@ -4,34 +4,10 @@
 { inputs, lib, osConfig ? {}, pkgs, ... }: {
   imports = [ inputs.niri.homeModules.niri ];
 
-  lib.niri.asUnit = args:
-    # if uwsm not enabled or osConfig doesn't exist
-    if !osConfig.programs.uwsm.enable or true then
-      { action.spawn = args; }
-    else
-      { action.spawn = [ "uwsm" "app" "--" ] ++ args; };
-
-  programs.bash.enable = true; # lol
-  # if we started supporting other display managers at the same time (not sure why we would do this) we could make an option for a general uwsm script(??)
-  programs.bash.profileExtra = lib.mkAfter (if
-    (osConfig.programs.uwsm.waylandCompositors or {}) ? niri
-  then
-    /* bash */ ''
-      if uwsm check may-start; then
-        exec uwsm start niri-uwsm.desktop
-      fi
-    ''
-  else
-    # is this really the behavior we want?
-    /* bash */ ''
-      if command -v uwsm; then
-        if uwsm check may-start && uwsm select; then
-          exec uwsm start default
-        fi
-      else if [ "$(tty)" = "/dev/tty1" ]; then
-        exec niri-session
-      fi
-    '');
+  programs.bash = {
+    enable = true; # lol
+    profileExtra = /* bash */ "exec niri-session";
+  };
 
   xdg.portal = {
     enable = true;
