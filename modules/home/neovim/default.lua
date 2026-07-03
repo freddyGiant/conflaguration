@@ -72,10 +72,10 @@ do
     'undo',
   }
 
-  vim.keymap.set('n', [[<A-c>]], [[zc]])
-  vim.keymap.set('n', [[<A-C>]], [[zC]])
-  vim.keymap.set('n', [[<A-o>]], [[zo]])
-  vim.keymap.set('n', [[<A-O>]], [[zO]])
+  -- vim.keymap.set('n', [[<A-c>]], [[zc]])
+  -- vim.keymap.set('n', [[<A-C>]], [[zC]])
+  -- vim.keymap.set('n', [[<A-o>]], [[zo]])
+  -- vim.keymap.set('n', [[<A-O>]], [[zO]])
   -- vim.keymap.set('n', '<A-j>', 'zj')
   -- vim.keymap.set('n', '<A-k>', 'zk')
   -- vim.keymap.set('n', '<A-v>', 'zv')
@@ -87,14 +87,14 @@ do
   vim.o.splitright = true
   vim.o.splitbelow = true
   vim.o.equalalways = false
-  -- TODO: decide whether we want A- commands
-  -- TODO: make it work in terminals
-  vim.keymap.set('n', [[<A-h>]], [[<C-w>h]])
-  vim.keymap.set('n', [[<A-j>]], [[<C-w>j]])
-  vim.keymap.set('n', [[<A-k>]], [[<C-w>k]])
-  vim.keymap.set('n', [[<A-l>]], [[<C-w>l]])
-  vim.keymap.set('n', [[<A-q>]], [[<C-w>q]])
-  vim.keymap.set('n', [[<A-w>]], [[<C-w>w]])
+  -- -- decide whether we want A- commands
+  -- -- make it work in terminals
+  -- vim.keymap.set('n', [[<A-h>]], [[<C-w>h]])
+  -- vim.keymap.set('n', [[<A-j>]], [[<C-w>j]])
+  -- vim.keymap.set('n', [[<A-k>]], [[<C-w>k]])
+  -- vim.keymap.set('n', [[<A-l>]], [[<C-w>l]])
+  -- vim.keymap.set('n', [[<A-q>]], [[<C-w>q]])
+  -- vim.keymap.set('n', [[<A-w>]], [[<C-w>w]])
 
   -- SCROLLING
   vim.o.scrolloff = 4
@@ -155,9 +155,9 @@ do
   -- FIXME: does this even work? footterm support?
   vim.o.mousefocus = true
 
-  -- leave terminal mode (and go into fish terminal mode)
-  -- NOTE: may have issues with nested neovim
-  vim.keymap.set('t', [[<ESC><ESC>]], [[<ESC><C-\><C-n>]])
+  -- -- leave terminal mode (and go into fish terminal mode)
+  -- -- may have issues with nested neovim
+  -- vim.keymap.set('t', [[<ESC><ESC>]], [[<ESC><C-\><C-n>]])
 
   -- split line and trim whitespace at (before) cursor
   -- NOTE: the `e` flag for `:s` doesn't go to the end of the search, it
@@ -320,23 +320,24 @@ do
     { desc = 'Replace the current window with [No Name] rather than closing it on bd', }
   )
 
-  -- PREVENT "EDITING READ-ONLY FILE" WARNING FROM GETTING IN THE WAY
-  -- (see :help W10)
-  vim.api.nvim_create_autocmd(
-    'FileChangedRO',
-    {
-      callback = function()
-        vim.api.nvim_echo(
-          { {'W10: Warning: Changing a readonly file', 'WarningMsg'} },
-          true,
-          {}
-        )
-        vim.bo.readonly = false
-      end,
-      desc = 'Suppress W10; echo instead',
-      group = vim.api.nvim_create_augroup('vrad.ro_warning', {}),
-    }
-  )
+  -- -- Do we need this?
+  -- -- PREVENT "EDITING READ-ONLY FILE" WARNING FROM GETTING IN THE WAY
+  -- -- (see :help W10)
+  -- vim.api.nvim_create_autocmd(
+  --   'FileChangedRO',
+  --   {
+  --     callback = function()
+  --       vim.api.nvim_echo(
+  --         { {'W10: Warning: Changing a readonly file', 'WarningMsg'} },
+  --         true,
+  --         {}
+  --       )
+  --       vim.bo.readonly = false
+  --     end,
+  --     desc = 'Suppress W10; echo instead',
+  --     group = vim.api.nvim_create_augroup('vrad.ro_warning', {}),
+  --   }
+  -- )
 
   -- WRITE READ-ONLY FILES
   vim.api.nvim_create_user_command('W', function()
@@ -359,24 +360,42 @@ do
 end
 
 -- POP-UP TERMINAL
--- TODO: make tab directory dependent?
-vim.keymap.set('n', [[<LEADER>t]], function()
-  vim.cmd('botright 10split')
+do
+  vim.g.popup_terminals = {}
 
-  ---@type boolean, string?
-  local succeeded, err = pcall(function() vim.cmd.buffer 'term' end)
+  vim.keymap.set('n', [[<leader>t]], function()
+    -- whatever is printed by :pwd, so can be window-local
+    local cwd = vim.fn.getcwd()
+    vim.cmd('botright 10split')
 
-  if not succeeded then
-    assert(err ~= nil)
-    if string.find(err, 'Vim:E93') or string.find(err, "Vim:E94") then
+    local function init_term()
       vim.cmd.term()
-    else
-      error(err)
+      local t = vim.g.popup_terminals
+      t[cwd] = vim.fn.bufnr()
+      vim.g.popup_terminals = t
     end
-  end
 
-  vim.cmd.startinsert()
-end)
+    if vim.g.popup_terminals[cwd] == nil then
+      init_term()
+    else
+      ---@type boolean, string?
+      local succeeded, err = pcall(function()
+        vim.cmd.buffer(vim.g.popup_terminals[cwd])
+      end)
+
+      if not succeeded then
+        assert(err ~= nil)
+        if string.find(err, 'Vim:E86') then
+          init_term()
+        else
+          error(err)
+        end
+      end
+    end
+
+    vim.cmd.startinsert()
+  end)
+end
 
 -- RE-SOURCE CURRENT CONFIG
 vim.api.nvim_create_user_command(
