@@ -3,7 +3,9 @@ nixos-rebuild build-vm \
   --flake .#homonculus \
   --override-input secret-settings /home/vrad/.conflaguration-secret-settings/
 
-and begin;
-  result/bin/run-homonculus-vm;
-  rm homonculus.qcow2
-end &
+and ./result/bin/run-homonculus-vm &
+
+# and begin;
+#   result/bin/run-homonculus-vm;
+#   # rm homonculus.qcow2;
+# end &
