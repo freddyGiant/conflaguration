@@ -1,5 +1,7 @@
-printf '
-           ^^                  @@@@@@@@@
+# https://www.asciiart.eu/art/5cbdf6e95fc805f7
+# one pixel offset on first line due to '
+printf \
+'           ^^                  @@@@@@@@@
       ^^       ^^           @@@@@@@@@@@@@@@
                            @@@@@@@@@@@@@@@@@              ^^
       i love you          @@@@@@@@@@@@@@@@@@@
@@ -9,5 +11,5 @@ printf '
   ~  ~~     ~         ~     ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~ 
 ~  ~       ~ ~      ~          ~~ ~~~~~~  ~      ~~  ~             ~~
       ~             ~       ~      ~      ~~   ~             ~
-most likely pjb, modified from asciiart.eu
+peter bier (pjb), modified
 '
