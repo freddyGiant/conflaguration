@@ -1,3 +1,6 @@
+# TODO: greeting
+# TODO: prompt
+# see discord screenshots lol
 { config, lib, ... }: {
   imports = [
     ./functions
@@ -11,18 +14,6 @@
     enable = true;
     generateCompletions = true;
   };
-
-  # TODO: consider whether fish should really be set as a default shell, or just as a default terminal shell
-  # also, what about ttys?
-
-  # # from https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
-  # programs.bash.initExtra = /* bash */ ''
-  #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-  #   then
-  #     shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-  #     exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-  #   fi
-  # '';
 
   # TODO: + bind (properly)
   # tried binding <TAB> to expand, but issues described below
