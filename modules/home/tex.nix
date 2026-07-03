@@ -5,6 +5,12 @@
 { config, lib, pkgs, ... }: lib.mkIf config.programs.neovim.enable {
   programs.texlive.enable = true;
 
+  # this is good, though
+  # although it should probabkly be the package field for the hm option
+  home.packages = [
+    (pkgs.texliveFull.withPackages (ps: [ ps.latexmk ]))
+  ];
+
   programs.neovim.plugins = [{
     plugin = pkgs.vimPlugins.vimtex;
     type = "lua";
