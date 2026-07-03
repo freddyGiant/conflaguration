@@ -8,9 +8,10 @@
     home.username = lib.mkForce config.my.username;
   };
 
+  home-manager.extraSpecialArgs = { inherit conflagurationPath inputs; };
+  home-manager.backupFileExtension = "~";
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit conflagurationPath inputs; };
   };
 }

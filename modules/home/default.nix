@@ -12,7 +12,7 @@
     ./niri.nix
     ./pipewire.nix
     ./ssh.nix
-    ./tex.nix
+    # ./tex.nix
     ./trash.nix
     ./tree.nix
   ];

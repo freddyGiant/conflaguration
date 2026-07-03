@@ -9,7 +9,7 @@
   config = {
     users.users.${config.my.username} = {
       isNormalUser = true;
-      password = "test";
+      # password = "test";
       group = config.my.username;
       extraGroups = [ "wheel" "input" "audio" "video" ];
       # hashedPassword = null;
@@ -17,7 +17,7 @@
       # initialPassword = "test";
     };
     users.groups.${config.my.username} = {};
-    users.mutableUsers = false;
+    # users.mutableUsers = false;
 
     # users.users.${config.my.username} = {
     #   isNormalUser = true;

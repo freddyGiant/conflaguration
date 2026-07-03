@@ -4,12 +4,8 @@
 # (currently) doesn't make sense without neovim
 { config, lib, pkgs, ... }: lib.mkIf config.programs.neovim.enable {
   programs.texlive.enable = true;
-
-  # this is good, though
-  # although it should probabkly be the package field for the hm option
-  home.packages = [
-    (pkgs.texliveFull.withPackages (ps: [ ps.latexmk ]))
-  ];
+  # programs.texlive.package = pkgs.texliveFull.withPackages (ps: [ ps.latexmk ]);
+  programs.texlive.extraPackages = p: { inherit (p) latexmk; };
 
   programs.neovim.plugins = [{
     plugin = pkgs.vimPlugins.vimtex;
