@@ -43,7 +43,7 @@
     co  = "checkout";
     d   = "diff";
     fe  = "fetch";
-    l   = "log --all --graph --oneline --decorate-refs-exclude='refs/remotes/origin'";
+    lg  = "log --all --graph --oneline --decorate-refs-exclude='refs/remotes/origin'";
     mg  = "merge --no-ff";
     rv  = "revert --no-commit";
     st  = "status";

@@ -36,6 +36,8 @@
     wev
     wl-clipboard
 
+    system-config-printer
+
     # heavier, graphical
     kdePackages.dolphin
     localsend
