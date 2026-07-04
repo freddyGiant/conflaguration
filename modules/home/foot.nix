@@ -4,7 +4,7 @@
     term = "xterm-256color";
     dpi-aware = "yes";
   };
-  programs.foot.settings.main.shell = pkgs.fish;
+  programs.foot.settings.main.shell = "${pkgs.fish}";
   programs.foot.settings.mouse.hide-when-typing = "yes";
 
   programs.foot.server.enable = true;
