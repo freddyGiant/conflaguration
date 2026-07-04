@@ -13,7 +13,6 @@ set -l message_day  (string join -- '\n'\
   'peter bier (pjb), reshaped, text added'
 )
 
-
 # normally i'd never use "
 set -l message_night (string join -- '\n' \
   "        _    .  ,   .     stay strong,                 " \

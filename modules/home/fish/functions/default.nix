@@ -20,7 +20,7 @@ let
   );
 in {
   programs.fish.functions = functionBodiesFromFiles {
-    # TODO: fish greeting
+    fish_greeting = {};
     fish_prompt = {};
     fish_user_key_bindings = {};
 
