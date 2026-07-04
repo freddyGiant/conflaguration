@@ -14,6 +14,7 @@ set -l message_day  (string join -- '\n'\
 )
 
 # normally i'd never use "
+# https://www.asciiart.eu/art/ec00171f6c37d765
 set -l message_night (string join -- '\n' \
   "        _    .  ,   .     stay strong,                 " \
   "    *  / \_ *  / \_      _ my beloved.   /\'__        *" \
