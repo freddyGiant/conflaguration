@@ -1,8 +1,3 @@
-# TODO: show nix develop status
-# https://wiki.nixos.org/wiki/Fish#Show_that_you_are_in_a_nix-shell
-# do we need to set an env var in nix develop?
-# in the abbr, perhaps?
-
 # Modified from the native function
 set -l last_pipestatus $pipestatus
 set -lx __fish_last_status $status # Export for __fish_print_pipestatus.

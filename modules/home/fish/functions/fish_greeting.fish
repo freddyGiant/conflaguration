@@ -27,7 +27,7 @@ set -l message_night (string join -- '\n' \
 )
 
 set -l hour (date '+%-H')
-if test $hour -lt 6; or test $hour -gt 22; then
+if test $hour -lt 6; or test $hour -gt 22
   printf $message_night
 else
   printf $message_day
