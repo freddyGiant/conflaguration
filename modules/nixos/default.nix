@@ -33,6 +33,9 @@
     pulse.enable = true;
   };
 
+  # POWER PROFILES
+  services.power-profiles-daemon.enable = true;
+
   # SYSTEM CLEANUP
   # TODO: look into more settings like these
   boot.tmp.cleanOnBoot = true;
