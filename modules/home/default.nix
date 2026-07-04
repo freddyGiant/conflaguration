@@ -29,32 +29,31 @@
     # cli, or small utility
     brightnessctl
     killall
-    ncdu
+    # ncdu
     pavucontrol
     # rnote
-    shotman
+    # shotman
     wev
     wl-clipboard
 
-    system-config-printer
+    # system-config-printer
 
     # heavier, graphical
     kdePackages.dolphin
-    localsend
-    prismlauncher
+    # localsend
+    # prismlauncher
     qalculate-qt
-    # also remove electron from flake.nix > permittedInsecurePackages
-    webcord
-    vlc
-    styluslabs-write
-    zoom-us
+    # webcord
+    # vlc
+    # styluslabs-write
+    # zoom-us
   ];
 
   programs.fd.enable = true;
   programs.fzf.enable = true;
   programs.ripgrep.enable = true;
-  programs.tofi  .enable = true;
-  programs.waybar.enable = true;
+  # programs.tofi.enable = true;
+  # programs.waybar.enable = true;
 
   # let home-manager enable/restart systemd services as appropriate
   systemd.user.startServices = "sd-switch";

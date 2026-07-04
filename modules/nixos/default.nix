@@ -5,25 +5,25 @@
     ./keyd.nix
     ./networkmanager.nix
     ./niri.nix
-    ./printing.nix
-    ./steam.nix
+    # ./printing.nix
+    # ./steam.nix
     ./user.nix
   ];
 
-  # programs.fish.enable = true;
-  programs.localsend = {
-    enable = true;
-    openFirewall = true;
-  };
+  # # programs.fish.enable = true;
+  # programs.localsend = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
 
   # allows for emoji and other fonts
   fonts.fontconfig.useEmbeddedBitmaps = true;
 
-  programs.partition-manager.enable = true;
+  # programs.partition-manager.enable = true;
 
-  # BLUETOOTH
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  # # BLUETOOTH
+  # hardware.bluetooth.enable = true;
+  # services.blueman.enable = true;
 
   # AUDIO
   services.pipewire = {
