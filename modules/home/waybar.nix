@@ -20,8 +20,9 @@
     "cpu"
     "memory"
     "temperature"
-    "power-profiles-daemon"
     "network"
+    "power-profiles-daemon"
+    "backlight"
     "battery"
     "pulseaudio"
   ];
@@ -35,17 +36,28 @@
   programs.waybar.settings.mainBar.temperature.format = "{temperatureC:>3}°";
   programs.waybar.settings.mainBar.temperature.hwmon-path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"; # tranticicero
 
-  programs.waybar.settings.mainBar."power-profiles-daemon".format-icons = {
-    performance = "FGHT";
-    balanced    = "BLNC";
-    power-saver = "SAVE";
-  };
-
   programs.waybar.settings.mainBar.network = {
     format-wifi         = "{essid:>10.10} {signalStrength:>3}%";
     format-ethernet     =     "       eth 100%";
     format-disconnected =     " localhost ---%";
   };
+
+  programs.waybar.settings.mainBar.power-profiles-daemon.format-icons = {
+    performance = "FGHT";
+    balanced    = "BLNC";
+    power-saver = "SAVE";
+  };
+
+  programs.waybar.settings.mainBar.backlight = {
+    format = "{icon}";
+    format-icons = ["", "", "", "", "", "", "", "", ""];
+  };
+
+  programs.waybar.settings.mainBar.battery = {
+    format          = "{capacity:>3}% -";
+    format-plugged  = "{capacity:>3}% ~";
+  };
+  programs.waybar.settings.mainBar.battery.states.critical = 12;
 
   programs.waybar.settings.mainBar.pulseaudio = {
     format                 = "{volume:>3}%   {format_source}";
@@ -57,12 +69,6 @@
     # format-icons.headphone = "";
   };
   programs.waybar.settings.mainBar.pulseaudio.on-click = "pavucontrol";
-
-  programs.waybar.settings.mainBar.battery = {
-    format          = "{capacity:>3}% -";
-    format-plugged  = "{capacity:>3}% ~";
-  };
-  programs.waybar.settings.mainBar.battery.states.critical = 12;
 
   programs.waybar.style = /* css */ ''
     * {
