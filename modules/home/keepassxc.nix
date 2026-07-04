@@ -1,10 +1,4 @@
 { config, lib, pkgs, ... }: {
-  options.my.keepassxc.asUnit = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-  };
-
-  config = {
     programs.keepassxc.enable = true;
     programs.keepassxc.settings.General.BackupBeforeSave = true;
     programs.keepassxc.settings.GUI = {
@@ -26,20 +20,18 @@
     # stubborn?
     programs.keepassxc.settings.FdoSecrets.Enable = true;
 
-    systemd.user.services."org.keepassxc.KeePassXC" =
-      lib.mkIf config.my.keepassxc.asUnit 
-      {
-        Unit = {
-          Description = "Modern, open-source password manager";
-          Documentation = "man:keepassxc(1)";
-        };
-        Service = {
-          ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
-          Restart = "on-failure";
-          RestartSec = 2;
-        };
-        Install.WantedBy = [ "graphical-session.target" ];
+    systemd.user.services."org.keepassxc.KeePassXC" = {
+      Unit = {
+        Description = "Modern, open-source password manager";
+        Documentation = "man:keepassxc(1)";
       };
+      Service = {
+        ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
+        Restart = "always";
+        RestartSec = 2;
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
   };
 }
 
