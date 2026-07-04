@@ -163,9 +163,9 @@ do
   -- NOTE: the `e` flag for `:s` doesn't go to the end of the search, it
   -- suppresses errors
   -- (in general, the flags are different for / and s/)
-  vim.keymap.set('i', [[<C-j>]],  [[<CR><ESC>m`<CMD>.-1s/\v\s+$//e<CR><ESC>``i]])
-  vim.keymap.set('n', [[<C-j>]], [[i<CR><ESC>m`<CMD>.-1s/\v\s+$//e<CR><ESC>``]])
-  vim.keymap.set('v', [[<C-j>]], [[c<CR><ESC>m`<CMD>.-1s/\v\s+$//e<CR><ESC>``]])
+  vim.keymap.set('i', [[<C-j>]],  [[<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``i]])
+  vim.keymap.set('n', [[<C-j>]], [[i<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``]])
+  vim.keymap.set('v', [[<C-j>]], [[c<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``]])
 end
 
 -- COMPLETION
