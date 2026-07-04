@@ -15,6 +15,7 @@
     # ./tex.nix
     ./trash.nix
     ./tree.nix
+    ./waybar.nix
   ];
 
   home.username = lib.mkDefault "vrad";
@@ -31,6 +32,7 @@
     killall
     # ncdu
     pavucontrol
+    power-profiles-daemon
     # rnote
     # shotman
     wev

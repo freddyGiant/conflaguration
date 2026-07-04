@@ -35,5 +35,5 @@ else
 end
 
 printf '\n\n'
-date '+it\'s %H:%M:%S, %a %-d %B %Y'
+date '+it\'s %H:%M:%S %A %d %B %Y'
 printf '\n'
