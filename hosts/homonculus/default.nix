@@ -3,10 +3,15 @@
     services.keyd.enable = lib.mkForce false;
     # users.users.${config.my.username}.initialPassword = "test";
 
+    virtualisation.sharedDirectories.sync = {
+      source = "/home/vrad/sync";
+      target = "/home/vrad/sync";
+    };
+
     # dangerous option
     services.getty.autologinUser = config.my.username;
 
-    virtualisation.memorySize = 2048;
+    virtualisation.memorySize = 4096;
     virtualisation.cores = 4;
     virtualisation.qemu.options = [
       "-device virtio-vga-gl"
