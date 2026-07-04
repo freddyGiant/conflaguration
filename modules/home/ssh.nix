@@ -5,7 +5,7 @@
   programs.ssh.settings."*" = {
     forwardAgent = false;
     hashKnownHosts = true;
-    extraOptions.RequestTTY = "yes";
+    requestTTY = "yes";
 
     controlMaster = "auto";
     controlPath = "${config.home.homeDirectory}/.ssh/sockets/%r_%h_%p";
