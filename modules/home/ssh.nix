@@ -58,4 +58,45 @@
         fi
       '';
     });
+
+  # requires that SSH_AUTH_SOCK be properly initialized; see ./ssh.nix
+  programs.keepassxc.settings.SSHAgent = {
+    Enabled = true;
+    UseOpenSSH = true;
+  };
+
+  home.packages = [ pkgs.libnotify ];
+  systemd.user.services."org.keepassxc.KeePassXC" =
+    lib.mkIf config.my.keepassxc.asUnit 
+    {
+      Unit = {
+        Wants = [ "ssh-agent.service" ];
+        After = [ "ssh-agent.service" ];
+        ReloadPropagatedFrom = [ "ssh-agent.service" ];
+      };
+
+      # warn in event of $SSH_AUTH_SOCK not being available
+      # including escaped single quotes in single-quoted strings *in* double-single-quoted nix strings is... as bad as it sounds
+      # https://nix.dev/manual/nix/2.26/language/string-literals
+      Service.ExecStartPre = lib.getExe (pkgs.writeShellApplication {
+        name = "keepassxc-check-ssh-auth-sock";
+        text = /* bash */ ''
+          # if string not empty, i.e. if var is set (to nonempty string)
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
+              'KeePassXC: SSH agent unavailable' \
+              "SSH_AUTH_SOCK is not set. Keys can't be added."
+
+            exit
+          fi
+
+          # if file at this dir exists (and is not some dummy file)
+          if [ ! -S "$SSH_AUTH_SOCK" ]; then
+            ${pkgs.libnotify}/bin/notify-send --app-name=KeePassXC \
+              'KeePassXC: SSH agent unavailable' \
+              "$SSH_AUTH_SOCK is not a valid socket. Keys can't be added."
+          fi
+        '';
+      });
+    };
 }
