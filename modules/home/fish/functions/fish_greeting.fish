@@ -10,7 +10,7 @@ set -l message_day  (string join -- '\n'\
   '  ~  ~~     ~         ~     ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~        ' \
   '~  ~       ~ ~      ~          ~~ ~~~~~~  ~      ~~  ~             ~~ ' \
   '      ~             ~       ~      ~      ~~   ~             ~        ' \
-  'peter bier (pjb), modified\n'
+  'peter bier (pjb), modified'
 )
 
 
@@ -24,5 +24,8 @@ set -l message_night (string join -- '\n' \
   "  /\  .-   `. \/     \ /==~=-=~=-=-;.  _/ \ -. `_/   \ " \
   " /  `-.__ ^   / .-'.--\ =-=~_=-=~=^/  _ `--./ .-'  `-  " \
   "/        `.  / /       `.~-^=-=~=^=.-'      '-._ `._   " \
-  "jgs, modified\n"
+  "jgs, modified"
 )
+
+date '+it\'s %H:%M:%S, %a %-d %B %Y'
+printf '\n'
