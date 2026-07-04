@@ -2,18 +2,16 @@
   programs.ssh.enable = true;
   # stupid
   programs.ssh.enableDefaultConfig = false;
-  programs.ssh.matchBlocks = {
-    "*" = {
-      forwardAgent = false;
-      hashKnownHosts = true;
-      extraOptions.RequestTTY = "yes";
+  programs.ssh.settings."*" = {
+    forwardAgent = false;
+    hashKnownHosts = true;
+    extraOptions.RequestTTY = "yes";
 
-      controlMaster = "auto";
-      controlPath = "${config.home.homeDirectory}/.ssh/sockets/%r_%h_%p";
-      controlPersist = "10m";
-      serverAliveInterval = 15;
-      serverAliveCountMax = 3;
-    };
+    controlMaster = "auto";
+    controlPath = "${config.home.homeDirectory}/.ssh/sockets/%r_%h_%p";
+    controlPersist = "10m";
+    serverAliveInterval = 15;
+    serverAliveCountMax = 3;
   };
 
   programs.fish.shellAbbrs.ssh = "ssh -S none";
@@ -25,8 +23,7 @@
   # more
   services.ssh-agent.enable = true;
 
-  # TODO: darwin?
-  # TODO: should it be like this in nixpkgs?
+  # TODO: they fucking fixed it in home-manager. use sshAuthSock
   #
   # from man:ssh-agent(1):
   # > The third way to run ssh-agent is via socket activation from a
@@ -48,7 +45,7 @@
         inherit (config.services.ssh-agent) socket;
       in /* bash */ ''
         if [ -z "$SSH_AUTH_SOCK" ]; then
-          systemctl --user --set-environment \
+          systemctl --user set-environment \
             SSH_AUTH_SOCK=/run/user/"$(id -u)"/${socket}
         fi
       '';
@@ -59,7 +56,9 @@
     UseOpenSSH = true;
   };
 
-  systemd.user.services.ssh-agent.Unit.Before = [ "org.keepassxc.KeePassXC.service" ];
-  systemd.user.services.ssh-agent.Unit.PropagatesReloadTo = [ "org.keepassxc.KeePassXC.service" ];
-  systemd.user.services.ssh-agent.Install.WantedBy = [ "org.keepassxc.KeePassXC.service" ];
+  systemd.user.services.ssh-agent = {
+    Unit.Before = [ "org.keepassxc.KeePassXC.service" ];
+    Unit.PropagatesReloadTo = [ "org.keepassxc.KeePassXC.service" ];
+    Install.WantedBy = [ "org.keepassxc.KeePassXC.service" ];
+  };
 }
