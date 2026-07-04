@@ -10,7 +10,7 @@ set -l message_day  (string join -- '\n'\
   '  ~  ~~     ~         ~     ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~        ' \
   '~  ~       ~ ~      ~          ~~ ~~~~~~  ~      ~~  ~             ~~ ' \
   '      ~             ~       ~      ~      ~~   ~             ~        ' \
-  'peter bier (pjb), modified'
+  'peter bier (pjb), reshaped, text added'
 )
 
 
@@ -24,8 +24,16 @@ set -l message_night (string join -- '\n' \
   "  /\  .-   `. \/     \ /==~=-=~=-=-;.  _/ \ -. `_/   \ " \
   " /  `-.__ ^   / .-'.--\ =-=~_=-=~=^/  _ `--./ .-'  `-  " \
   "/        `.  / /       `.~-^=-=~=^=.-'      '-._ `._   " \
-  "jgs, modified"
+  "Joan G. Stark (Spunk) (jgs), text added"
 )
 
+set -l hour (date '+%-H')
+if test $hour -lt 6; or test $hour -gt 22; then
+  printf $message_night
+else
+  printf $message_day
+end
+
+printf '\n\n'
 date '+it\'s %H:%M:%S, %a %-d %B %Y'
 printf '\n'
