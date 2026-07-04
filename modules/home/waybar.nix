@@ -1,52 +1,85 @@
-{ pkgs, ... }: {
-  home.programs = with pkgs; [ power-profiles-daemon ];
-
+# TODO: privacy?
+{ pkgs, homeSources, ... }: {
   programs.waybar.enable = true;
   programs.waybar.systemd.enable = true;
   programs.waybar.settings.mainBar = {
     layer = "top";
     position = "top";
-    height = 20;
+    height = 24;
     spacing = 10;
-
-    modules-center = [ "clock" "battery" "power-profiles-daemon" ];
-
-    clock.format = "%H:%M:%S %A %d %B %Y";
-    clock.interval = 1;
-
-    battery = {
-      format          = "- {capacity} -";
-      format-plugged  = "~ {capacity} ~";
-    };
-    battery.states.critical = 12;
-
-    modules-right = [ "pulseaudio" "temperature" "tray" ];
-
-    pulseaudio = {
-      format       = "{volume}%   {format_source}";
-      # FIXME: coffee mug???
-      format-muted = "󰅶 {format_source}";
-      format-bluetooth       = "{volume}%  {format_source}";
-      format-bluetooth-muted = "󰅶 {format_source}";
-      format-source       = "";
-      format-source-muted = "";
-      # format-icons.headphone = "";
-    };
-    # TODO: hmmm.... pipewire?
-    pulseaudio.on-click = "pavucontrol";
-
-    temperature.format = "{temperatureC}°";
-    # tranticicero
-    temperature.hmwon-path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input";
-
-    # orders
-    tray.space = 10;
   };
 
-  programs.waybar.settings.mainBar.style = /* css */ ''
+  programs.waybar.settings.mainBar.modules-left = [ "tray" ];
+
+  programs.waybar.settings.mainBar.modules-center = [ "clock" ];
+
+  programs.waybar.settings.mainBar.clock.format = "{:%H:%M:%S %A %d %B %Y}";
+  programs.waybar.settings.mainBar.clock.interval = 1;
+
+  programs.waybar.settings.mainBar.modules-right = [
+    "cpu"
+    "memory"
+    "temperature"
+    "power-profiles-daemon"
+    "network"
+    "battery"
+    "pulseaudio"
+  ];
+
+  programs.waybar.settings.mainBar.cpu.format = "CPU {usage:>3}%";
+  programs.waybar.settings.mainBar.cpu.interval = 2;
+
+  programs.waybar.settings.mainBar.memory.format = "RAM {percentage:>3}%";
+  programs.waybar.settings.mainBar.memory.interval = 2;
+
+  programs.waybar.settings.mainBar.temperature.format = "{temperatureC:>3}°";
+  programs.waybar.settings.mainBar.temperature.hwmon-path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"; # tranticicero
+
+  programs.waybar.settings.mainBar."power-profiles-daemon".format-icons = {
+    performance = "FGHT";
+    balanced    = "BLNC";
+    power-saver = "SAVE";
+  };
+
+  programs.waybar.settings.mainBar.network = {
+    format-wifi         = "{essid:>10.10} {signalStrength:>3}%";
+    format-ethernet     =     "       eth 100%";
+    format-disconnected =     " localhost ---%";
+  };
+
+  programs.waybar.settings.mainBar.pulseaudio = {
+    format                 = "{volume:>3}%   {format_source}";
+    format-muted           =         "MUTE   {format_source}"; # 󰸈
+    format-bluetooth       = "{volume:>3}% B {format_source}"; # 
+    format-bluetooth-muted =         "MUTE B {format_source}";
+    format-source       = "LIVE"; # 
+    format-source-muted = "MUTE"; # 
+    # format-icons.headphone = "";
+  };
+  programs.waybar.settings.mainBar.pulseaudio.on-click = "pavucontrol";
+
+  programs.waybar.settings.mainBar.battery = {
+    format          = "{capacity:>3}% -";
+    format-plugged  = "{capacity:>3}% ~";
+  };
+  programs.waybar.settings.mainBar.battery.states.critical = 12;
+
+  programs.waybar.style = /* css */ ''
     * {
       font-family: monospace;
-      font-size: 10pt;
+      font-size: 12pt;
+      color: white;
+      background-color: black;
+    }
+
+    #tray, #clock, #cpu, #memory, #temperature,
+    #power-profiles-daemon, #battery, #pulseaudio {
+      background: transparent;
+      padding: 0 8px;
+    }
+
+    #battery.critical:not(.charging) {
+      background-color: #f53c3c;
     }
   '';
 }
