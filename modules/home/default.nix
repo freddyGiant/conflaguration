@@ -4,6 +4,7 @@
     ./directories.nix
     ./direnv.nix
     ./fish
+    ./firefox.nix
     ./fonts.nix
     ./foot.nix
     ./git.nix
