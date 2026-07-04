@@ -24,6 +24,9 @@
     Unit = {
       Description = "Modern, open-source password manager";
       Documentation = "man:keepassxc(1)";
+      # fine if it isn't there
+      # in fact, enabling SSH happens in ssh.nix
+      Wants = config.sshAuthSock.systemd.socketProviderUnit;
     };
     Service = {
       ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
