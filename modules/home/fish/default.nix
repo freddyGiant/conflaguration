@@ -15,6 +15,8 @@
     generateCompletions = true;
   };
 
+  programs.foot.settings.main.shell = "${pkgs.fish}/bin/fish";
+
   # TODO: + bind (properly)
   # tried binding <TAB> to expand, but issues described below
   # consider just creating file directly

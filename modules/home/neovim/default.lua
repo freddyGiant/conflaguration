@@ -166,6 +166,9 @@ do
   vim.keymap.set('i', [[<C-j>]],  [[<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``i]])
   vim.keymap.set('n', [[<C-j>]], [[i<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``]])
   vim.keymap.set('v', [[<C-j>]], [[c<CR><ESC>m`<CMD>.keeppattern -1s/\v\s+$//e<CR><ESC>``]])
+
+  -- SHELL
+  vim.o.shell = 'fish'
 end
 
 -- COMPLETION
