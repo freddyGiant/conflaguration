@@ -1,3 +1,5 @@
+# TODO: make me gay
+
 # https://www.asciiart.eu/art/5cbdf6e95fc805f7
 set -l message_day  (string join -- '\n'\
   '           ^^                  @@@@@@@@@                              ' \
