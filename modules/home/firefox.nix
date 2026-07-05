@@ -1,63 +1,139 @@
 let
-  mozAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
 in
 {
   programs.firefox = {
     enable = true;
     languagePacks = [ "en-US" ];
 
-    policies.Bookmarks = [
-    ];
+    # universal always-extensions
+    policies.ExtensionSettings = let
+      moz = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+    in
+    {
+      "*".installation_mode = "blocked";
 
-    ExtensionSettings."*".installation_mode = "blocked";
+      "uBlock0@raymondhill.net" = {
+        default_area = "navbar";
+        install_url = moz "ublock-origin";
+        installation_mode = "force_installed";
+        private_browsing = true;
+        # updates_disabled  = true;
+      };
 
-    # Feature Disabling
-    # disable bullshit
-    # policies.DisableBuiltinPDFViewer       = true;
-    policies.AIControls = {
-      Default.Value = "blocked";
-      Translations.Value = "blocked";
-      PDFAltText.Value = "blocked";
-      SmartTabGroups.Value = "blocked";
-      LinkPreviewKeyPoints.Value = "blocked";
-      SidebarChatbot.Value = "blocked";
-      SmartWindow.Value = "blocked";
-
-      Default.Loacked = true;
-      Translations.Loacked = true;
-      PDFAltText.Loacked = true;
-      SmartTabGroups.Loacked = true;
-      LinkPreviewKeyPoints.Loacked = true;
-      SidebarChatbot.Loacked = true;
-      SmartWindow.Loacked = true;
+      "@testpilot-containers" = {
+        default_area = "menupanel";
+        install_url = moz "multi-account-containers";
+        installation_mode = "force_installed";
+        updates_disabled = true;
+      }
     };
 
-    policies.AppAutoUpdate                 = false;
-    policies.BackgroundAppUpdate           = false;
-    policies.DontCheckDefaultBrowser       = true;
-    policies.OfferToSaveLogins             = false;
-    policies.DisableFirefoxStudies         = true;
-    policies.DisableFirefoxAccounts        = true;
-    policies.DisableFirefoxScreenshots     = true;
-    policies.DisableForgetButton           = true;
-    policies.DisableMasterPasswordCreation = true;
-    policies.DisableProfileImport          = true;
-    policies.DisableProfileRefresh         = true;
-    policies.DisableRemoteImprovements     = true;
-    policies.DisableSetDesktopBackground   = true;
-    policies.DisablePocket                 = true;
-    policies.DisableTelemetry              = true;
-    policies.DisableFormHistory            = true;
-    policies.DisablePasswordReveal         = true;
+    policies.EnableTrackingProtection = {
+      Value = true;
+      Cryptomining = true;
+      Fingerprinting = true;
+      Locked = true;
+    };
 
-    # Access Restrictions
-    # policies.BlockAboutConfig              = false;
-    # policies.BlockAboutProfiles            = true;
-    # policies.BlockAboutSupport             = true;
+    # disable bullshit
+    policies = {
+      Cookies = {
+        Behavior = "limit-foreign";
+        BehaviorPrivateBrowsing = "limit-foreign";
+        Locked = true;
+      };
 
-    # UI and Behavior
-    policies.DisplayMenuBar                = "never";
-    # policies.HardwareAcceleration          = false;
-    # policies.DefaultDownloadDirectory      = "${home}/Downloads";
+      SearchEngines.Add = [{
+        Name = "Google Web";
+        Alias = "web";
+        URLTemplate = "https://www.google.com/search?udm=14&q={searchTerms}";
+      }];
+      SearchEngines.Default = "Google Web";
+      SearchEngines.Remove = [ "amazon" "bing" "ebay" "perplexity" ];
+      SearchEngines.PreventInstalls = true;
+
+      NewTabPage = false;
+
+      Homepage = {
+        StartPage = "none";
+        Locked = "true";
+      };
+
+      NoDefaultBookmarks = true;
+
+      FirefoxSuggest = {
+        WebSuggestions = false;
+        SponsoredSuggestions = false;
+        ImproveSuggest = false;
+        Locked = true;
+      };
+
+      FirefoxHome = {
+        Search = false;
+        TopSites = false;
+        SponsoredTopSites = false;
+        Highlights = false;
+        Pocket = false;
+        Stories = false;
+        SponsoredPocket = false;
+        SponsoredStories = false;
+        Snippets = false;
+        Locked = true;
+      };
+
+      AIControls = {
+        Default.Value = "blocked";
+        Translations.Value = "blocked";
+        PDFAltText.Value = "blocked";
+        SmartTabGroups.Value = "blocked";
+        LinkPreviewKeyPoints.Value = "blocked";
+        SidebarChatbot.Value = "blocked";
+        SmartWindow.Value = "blocked";
+
+        Default.Locked = true;
+        Translations.Locked = true;
+        PDFAltText.Locked = true;
+        SmartTabGroups.Locked = true;
+        LinkPreviewKeyPoints.Locked = true;
+        SidebarChatbot.Locked = true;
+        SmartWindow.Locked = true;
+      };
+
+      GenerativeAI = {
+        Enabled = false;
+        Chatbot = false;
+        LinkPreviews = false;
+        TabGroups = false;
+        Locked = true;
+      };
+
+      AppAutoUpdate                 = false;
+      BackgroundAppUpdate           = false;
+      OfferToSaveLogins             = false;
+      AutofillAddressDisabled       = true;
+      AutofillCreditCardDisabled    = true;
+      DontCheckDefaultBrowser       = true;
+      DisableFirefoxStudies         = true;
+      DisableFirefoxAccounts        = true;
+      DisableFirefoxScreenshots     = true;
+      DisableForgetButton           = true;
+      DisableMasterPasswordCreation = true;
+      DisableProfileImport          = true;
+      DisableProfileRefresh         = true;
+      DisableRemoteImprovements     = true;
+      DisableSetDesktopBackground   = true;
+      DisablePocket                 = true;
+      DisableTelemetry              = true;
+      DisableFormHistory            = true;
+      DisablePasswordReveal         = true;
+
+      DisplayMenuBar                = "never";
+      # HardwareAcceleration          = false;
+      # DefaultDownloadDirectory      = "${home}/Downloads";
+      # BlockAboutConfig              = false;
+      # BlockAboutProfiles            = true;
+      # BlockAboutSupport             = true;
+      # DisableBuiltinPDFViewer       = true;
+    };
   };
 }
