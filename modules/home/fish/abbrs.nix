@@ -4,11 +4,14 @@
 in {
   programs.fish.shellAbbrs = lib.mkMerge [
     {
+      "+" = "nix shell nixpkgs#";
+
       # basic unix abbrs that we might as well always have
       # even if we don't *strictly* know that all these programs are installed
       # (the overhead is so small)
 
       c   = "cp --verbose --interactive --archive --dereference";
+      l   = "ls --almost-all --escape --color --group-directories-first";
       la  = "ls --almost-all --escape --color --group-directories-first";
       ll  = "ls --almost-all --escape --color --classify --si -og --group-directories-first";
       moo = "mv --interactive";
@@ -16,7 +19,6 @@ in {
 
       # nix abbrs
 
-      "+" = "nix shell nixpkgs#";
     }
     (lib.mkIf (inputs.secret-settings ? path && inputs.secret-settings ? conflagurationPath) {
       # FIXME: conflaguration path is incorrect
