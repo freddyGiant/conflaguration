@@ -4,9 +4,17 @@
 
   programs.firefox.profiles.default = {
     packages = with pkgs.nur.repos.rycee.firefox-addons; [
-      ublock-origin
       multi-account-containers
-      container-tab-groups
+
+      ublock-origin
+
+      tree-style-tab
+      move-unloaded-tabs-for-tst
+      tst-active-tab-on-scroll-bar
+      fade-old-tabs
+      tst-indent-line
+      tst-more-tree-commands
+      tst-tab-search
     ];
 
     extensions.settings."uBlock0@raymondhill.net".settings = {
@@ -147,14 +155,6 @@
     search.engines = {
       "Nix Packages" = {
         urls = [{ template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; }];
-        # urls = [{
-        #   template = "https://search.nixos.org/packages";
-        #   params = [
-        #     { name = "channel"; value = "unstable"; }
-        #     { name = "query";   value = "{searchTerms}"; }
-        #   ];
-        # }];
-        # icon           = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
         definedAliases = [ "@np" ];
       };
 
