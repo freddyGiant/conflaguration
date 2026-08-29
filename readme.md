@@ -63,3 +63,9 @@ Managing `SSH_AUTH_SOCK` used to suck. Home-manager's solution for it sucked. I 
 - Declaring attrs separately is often more readable-- only group them when they only make sense together.
   - the options and config attrsets are probably exceptions (esp. since the latter is optional)
 - The imperative mood is handy.
+enable options
+
+I like this bit from https://github.com/mightyiam/dendritic#
+> Often created using lib.mkEnableOption, enable options are necessary when a module is imported even though a feature it provides should not necessarily be enabled. This anti-pattern originates in NixOS, where most NixOS modules provided by Nixpkgs are imported by default. That was not a good idea. Don't repeat it. In most cases, importing a module should enable the feature that it provides.
+
+I agree that this appear to enable modularity, but it's actually a bit silly.
