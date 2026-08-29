@@ -1,12 +1,12 @@
 {
   description = "A Vradical New Configuration Conflagaration";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.rad-flake.url = "github:freddyGiant/rad-flake";
 
   inputs.home-manager.url = "github:nix-community/home-manager";
-  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
   inputs.niri.url = "github:sodiboo/niri-flake";
 
@@ -24,6 +24,8 @@
       ./modules/nixos
       ./modules/home
     ];
+
+    perSystem = { pkgs-unstable, ... }: { formatter = pkgs-unstable.nixfmt-tree; };
   };
 
   # outputs = { nixpkgs, home-manager, secret-settings, ... } @ inputs: let
