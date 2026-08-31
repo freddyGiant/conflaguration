@@ -34,37 +34,48 @@
   programs.waybar.settings.mainBar.memory.interval = 2;
 
   programs.waybar.settings.mainBar.temperature.format = "{temperatureC:>3}°";
-  programs.waybar.settings.mainBar.temperature.hwmon-path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"; # tranticicero
+  programs.waybar.settings.mainBar.temperature.hwmon-path =
+    "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"; # tranticicero
 
   programs.waybar.settings.mainBar.network = {
-    format-wifi         = "{essid:>10.10} {signalStrength:>3}%";
-    format-ethernet     =     "       eth 100%";
-    format-disconnected =     " localhost ---%";
+    format-wifi = "{essid:>10.10} {signalStrength:>3}%";
+    format-ethernet = "       eth 100%";
+    format-disconnected = " localhost ---%";
   };
 
   programs.waybar.settings.mainBar.power-profiles-daemon.format-icons = {
     performance = "FGHT";
-    balanced    = "BLNC";
+    balanced = "BLNC";
     power-saver = "SAVE";
   };
 
   programs.waybar.settings.mainBar.backlight = {
     format = "{icon}";
-    format-icons = ["", "", "", "", "", "", "", "", ""];
+    format-icons = [
+      ""
+      ""
+      ""
+      ""
+      ""
+      ""
+      ""
+      ""
+      ""
+    ];
   };
 
   programs.waybar.settings.mainBar.battery = {
-    format          = "{capacity:>3}% -";
-    format-plugged  = "{capacity:>3}% ~";
+    format = "{capacity:>3}% -";
+    format-plugged = "{capacity:>3}% ~";
   };
   programs.waybar.settings.mainBar.battery.states.critical = 12;
 
   programs.waybar.settings.mainBar.pulseaudio = {
-    format                 = "{volume:>3}%   {format_source}";
-    format-muted           =         "MUTE   {format_source}"; # 󰸈
-    format-bluetooth       = "{volume:>3}% B {format_source}"; # 
-    format-bluetooth-muted =         "MUTE B {format_source}";
-    format-source       = "LIVE"; # 
+    format = "{volume:>3}%   {format_source}";
+    format-muted = "MUTE   {format_source}"; # 󰸈
+    format-bluetooth = "{volume:>3}% B {format_source}"; # 
+    format-bluetooth-muted = "MUTE B {format_source}";
+    format-source = "LIVE"; # 
     format-source-muted = "MUTE"; # 
     # format-icons.headphone = "";
   };

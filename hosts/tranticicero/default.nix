@@ -7,8 +7,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   # where did these come from? don't remember
   boot.initrd.availableKernelModules = [
-    "ahci" "ehci_pci" "sdhci_pci" "rtsx_pci_sdmmc"
-    "sd_mod" "usb_storage"
+    "ahci"
+    "ehci_pci"
+    "sdhci_pci"
+    "rtsx_pci_sdmmc"
+    "sd_mod"
+    "usb_storage"
   ];
 
   system.autoUpgrade = {

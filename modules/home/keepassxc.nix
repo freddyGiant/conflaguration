@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs.keepassxc.enable = true;
   programs.keepassxc.settings.General.BackupBeforeSave = true;
   programs.keepassxc.settings.GUI = {
@@ -36,4 +42,3 @@
     Install.WantedBy = [ "graphical-session.target" ];
   };
 }
-

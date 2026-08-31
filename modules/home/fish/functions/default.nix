@@ -11,20 +11,23 @@ let
   #     [fishshell.com/docs/current/cmds/function.html](https://fishshell.com/docs/current/cmds/function.html).
   #
   #     Why isn't this documented better?
-  functionBodiesFromFiles = builtins.mapAttrs (name: otherFunctionAttrs:
-  # TODO: write this nicer
-  # (like, why not use map?)
+  functionBodiesFromFiles = builtins.mapAttrs (
+    name: otherFunctionAttrs:
+    # TODO: write this nicer
+    # (like, why not use map?)
     {
       body = builtins.readFile ./${name}.fish;
-    } // otherFunctionAttrs
+    }
+    // otherFunctionAttrs
   );
-in {
+in
+{
   programs.fish.functions = functionBodiesFromFiles {
-    fish_greeting = {};
-    fish_prompt = {};
+    fish_greeting = { };
+    fish_prompt = { };
     # fish_right_prompt = {};
-    fish_user_key_bindings = {};
+    fish_user_key_bindings = { };
 
-    back_up_home = {};
+    back_up_home = { };
   };
 }

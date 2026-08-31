@@ -1,9 +1,9 @@
-{
+{ pkgs-unstable, ... }: {
   programs.firefox.enable = true;
   programs.firefox.languagePacks = [ "en-US" ];
 
   programs.firefox.profiles.default = {
-    packages = with pkgs.nur.repos.rycee.firefox-addons; [
+    packages = with pkgs-unstable.nur.repos.rycee.firefox-addons; [
       multi-account-containers
 
       ublock-origin
@@ -154,44 +154,45 @@
     #   }
     search.engines = {
       "Nix Packages" = {
-        urls = [{ template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; }];
+        urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
         definedAliases = [ "@np" ];
       };
 
       "MyNixOS" = {
-        urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+        urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
         definedAliases = [ "@mn" ];
       };
 
       "NixHub" = {
-        urls = [{ template = "https://www.nixhub.io/search?q={searchTerms}"; }];
+        urls = [ { template = "https://www.nixhub.io/search?q={searchTerms}"; } ];
         definedAliases = [ "@nh" ];
       };
     };
   };
 
   # universal always-extensions
-  programs.firefox.policies.ExtensionSettings = let
-    moz = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
-  in
-  {
-    "*".installation_mode = "blocked";
+  programs.firefox.policies.ExtensionSettings =
+    let
+      moz = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+    in
+    {
+      "*".installation_mode = "blocked";
 
-    "uBlock0@raymondhill.net" = {
-      default_area = "navbar";
-      install_url = moz "ublock-origin";
-      installation_mode = "force_installed";
-      private_browsing = true;
-      # updates_disabled  = true;
+      "uBlock0@raymondhill.net" = {
+        default_area = "navbar";
+        install_url = moz "ublock-origin";
+        installation_mode = "force_installed";
+        private_browsing = true;
+        # updates_disabled  = true;
+      };
+
+      "@testpilot-containers" = {
+        default_area = "menupanel";
+        install_url = moz "multi-account-containers";
+        installation_mode = "force_installed";
+        updates_disabled = true;
+      };
     };
-
-    "@testpilot-containers" = {
-      default_area = "menupanel";
-      install_url = moz "multi-account-containers";
-      installation_mode = "force_installed";
-      updates_disabled = true;
-    }
-  };
 
   programs.firefox.policies.EnableTrackingProtection = {
     Value = true;
@@ -208,13 +209,20 @@
       Locked = true;
     };
 
-    SearchEngines.Add = [{
-      Name = "Google Web";
-      Alias = "web";
-      URLTemplate = "https://www.google.com/search?udm=14&q={searchTerms}";
-    }];
+    SearchEngines.Add = [
+      {
+        Name = "Google Web";
+        Alias = "web";
+        URLTemplate = "https://www.google.com/search?udm=14&q={searchTerms}";
+      }
+    ];
     SearchEngines.Default = "Google Web";
-    SearchEngines.Remove = [ "amazon" "bing" "ebay" "perplexity" ];
+    SearchEngines.Remove = [
+      "amazon"
+      "bing"
+      "ebay"
+      "perplexity"
+    ];
     SearchEngines.PreventInstalls = true;
 
     NewTabPage = false;
@@ -272,27 +280,27 @@
       Locked = true;
     };
 
-    AppAutoUpdate                 = false;
-    BackgroundAppUpdate           = false;
-    OfferToSaveLogins             = false;
-    AutofillAddressDisabled       = true;
-    AutofillCreditCardDisabled    = true;
-    DontCheckDefaultBrowser       = true;
-    DisableFirefoxStudies         = true;
-    DisableFirefoxAccounts        = true;
-    DisableFirefoxScreenshots     = true;
-    DisableForgetButton           = true;
+    AppAutoUpdate = false;
+    BackgroundAppUpdate = false;
+    OfferToSaveLogins = false;
+    AutofillAddressDisabled = true;
+    AutofillCreditCardDisabled = true;
+    DontCheckDefaultBrowser = true;
+    DisableFirefoxStudies = true;
+    DisableFirefoxAccounts = true;
+    DisableFirefoxScreenshots = true;
+    DisableForgetButton = true;
     DisableMasterPasswordCreation = true;
-    DisableProfileImport          = true;
-    DisableProfileRefresh         = true;
-    DisableRemoteImprovements     = true;
-    DisableSetDesktopBackground   = true;
-    DisablePocket                 = true;
-    DisableTelemetry              = true;
-    DisableFormHistory            = true;
-    DisablePasswordReveal         = true;
+    DisableProfileImport = true;
+    DisableProfileRefresh = true;
+    DisableRemoteImprovements = true;
+    DisableSetDesktopBackground = true;
+    DisablePocket = true;
+    DisableTelemetry = true;
+    DisableFormHistory = true;
+    DisablePasswordReveal = true;
 
-    DisplayMenuBar                = "never";
+    DisplayMenuBar = "never";
     # HardwareAcceleration          = false;
     # DefaultDownloadDirectory      = "${home}/Downloads";
     # BlockAboutConfig              = false;

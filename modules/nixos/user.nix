@@ -11,19 +11,28 @@
     users.users.${config.my.username} = {
       isNormalUser = true;
       group = config.my.username;
-      extraGroups = [ "wheel" "input" "audio" "video" ];
+      extraGroups = [
+        "wheel"
+        "input"
+        "audio"
+        "video"
+      ];
     };
-    users.groups.${config.my.username} = {};
+    users.groups.${config.my.username} = { };
 
     # NOTE: consider users.users.<name>.cryptHomeLuks
     # here or in disk file
 
-    security.sudo.extraRules = [{
-      users = [ config.my.username ];
-      commands = [{
-        command = "ALL";
-        options = [ "NOPASSWD" ];
-      }];
-    }];
+    security.sudo.extraRules = [
+      {
+        users = [ config.my.username ];
+        commands = [
+          {
+            command = "ALL";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
   };
 }

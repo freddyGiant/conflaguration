@@ -1,6 +1,13 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   mkBeforeLsp = lib.mkOrder (config.lib.neovim.order.lsp - 500);
-in {
+in
+{
   programs.neovim.plugins = [ pkgs.vimPlugins.nvim-lspconfig ];
   programs.neovim.initLua = mkBeforeLsp /* lua */ ''
     -- NVIM-LSPCONFIG

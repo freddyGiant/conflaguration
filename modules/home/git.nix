@@ -32,21 +32,25 @@
   # programs.fish.shellAbbrs.g = "git";
   programs.fish.shellAbbrs = {
     g = "git";
-  } // (builtins.mapAttrs (_: expansion: {
-    command = "git";
-    inherit expansion;
-  }) {
-    a   = "add";
-    br  = "branch";
-    cm  = "commit --message";
-    cma = "commit --all --message";
-    co  = "checkout";
-    d   = "diff";
-    fe  = "fetch";
-    lg  = "log --all --graph --oneline --decorate-refs-exclude='refs/remotes/origin'";
-    mg  = "merge --no-ff";
-    rv  = "revert --no-commit";
-    st  = "status";
-    sw  = "switch";
-  });
+  }
+  // (builtins.mapAttrs
+    (_: expansion: {
+      command = "git";
+      inherit expansion;
+    })
+    {
+      a = "add";
+      br = "branch";
+      cm = "commit --message";
+      cma = "commit --all --message";
+      co = "checkout";
+      d = "diff";
+      fe = "fetch";
+      lg = "log --all --graph --oneline --decorate-refs-exclude='refs/remotes/origin'";
+      mg = "merge --no-ff";
+      rv = "revert --no-commit";
+      st = "status";
+      sw = "switch";
+    }
+  );
 }

@@ -1,7 +1,7 @@
 # TODO: greeting
 # TODO: prompt
 # see discord screenshots lol
-{ config, lib, ... }: {
+{ lib, pkgs-unstable, ... }: {
   imports = [
     ./functions
     ./abbrs.nix
@@ -15,7 +15,7 @@
     generateCompletions = true;
   };
 
-  programs.foot.settings.main.shell = "${pkgs.fish}/bin/fish";
+  programs.foot.settings.main.shell = "${pkgs-unstable.fish}/bin/fish";
 
   # TODO: + bind (properly)
   # tried binding <TAB> to expand, but issues described below

@@ -1,9 +1,15 @@
-{ config, conflagurationPath, inputs, ... }: {
+{
+  config,
+  conflagurationPath,
+  inputs,
+  ...
+}:
+{
   # including home config as a module, passing down necessary system config
   home-manager.users.${config.my.username} = { lib, ... }: {
     imports = [
       ../../modules/home
-      (inputs.secret-settings.homeModule or {})
+      (inputs.secret-settings.homeModule or { })
     ];
     home.username = lib.mkForce config.my.username;
   };

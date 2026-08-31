@@ -1,4 +1,5 @@
-{ pkgs, ... }: let
+{ pkgs, ... }:
+let
   #`nixpkgs.vimPlugins.nvim-treesitter.withPlugins`
   # will fetch the grammars packaged in
   #`nixpkgs.vimPlugins.nvim-treesitter-parsers.*`
@@ -26,12 +27,12 @@
     "python"
     "qmljs"
     "regex"
-    /* experimental, for SML */ "ocaml"
+    # experimental, for SML
+    "ocaml"
   ];
-  tsWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
-    map (g: p.${g}) grammars
-  );
-in {
+  tsWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: map (g: p.${g}) grammars);
+in
+{
   programs.neovim.plugins = [
     {
       plugin = tsWithGrammars;

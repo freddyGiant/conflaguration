@@ -1,7 +1,9 @@
-{ inputs, lib, ... }: let
+{ inputs, lib, ... }:
+let
   # could consider adding something more generalized, but that isn't needed for now
   subcommand = command: expansion: { inherit command expansion; };
-in {
+in
+{
   programs.fish.shellAbbrs = lib.mkMerge [
     {
       "+" = "nix shell nixpkgs#";
@@ -10,12 +12,12 @@ in {
       # even if we don't *strictly* know that all these programs are installed
       # (the overhead is so small)
 
-      c   = "cp --verbose --interactive --archive --dereference";
-      l   = "ls --almost-all --escape --color --group-directories-first";
-      la  = "ls --almost-all --escape --color --group-directories-first";
-      ll  = "ls --almost-all --escape --color --classify --si -og --group-directories-first";
+      c = "cp --verbose --interactive --archive --dereference";
+      l = "ls --almost-all --escape --color --group-directories-first";
+      la = "ls --almost-all --escape --color --group-directories-first";
+      ll = "ls --almost-all --escape --color --classify --si -og --group-directories-first";
       moo = "mv --interactive";
-      rs  = "rsync --verbose --recursive --relative --archive --copy-links";
+      rs = "rsync --verbose --recursive --relative --archive --copy-links";
 
       # nix abbrs
 
@@ -44,7 +46,8 @@ in {
       #   home-manager switch --impure \
       #     --flake ${final.home.homeDirectory}/hm#${final.home.username}@${hostname}
       # '';
-    }];
+    }
+  ];
 
   programs.fish.preferAbbrs = true;
 }

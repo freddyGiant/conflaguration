@@ -63,6 +63,9 @@
 
   programs.home-manager.enable = true;
   # ?
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   home.stateVersion = "25.11";
 }

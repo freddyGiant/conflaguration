@@ -317,6 +317,8 @@ do
   vim.o.autoread = true
 
   -- DELETE BUFFER BUT PRESERVE WINDOW LAYOUT WITH [NO NAME] BUFFER
+  -- TODO: https://vim.fandom.com/wiki/Deleting_a_buffer_without_closing_the_window
+  -- https://www.vim.org/scripts/script.php?script_id=2103
   vim.api.nvim_create_user_command(
     'Bd',
     'new | bd #',

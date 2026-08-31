@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home.packages = [ pkgs.lua-language-server ];
   programs.neovim.initLua = config.lib.neovim.order.mkLsp /* lua */ ''
     -- from comments in nvim-lspconfig/lsp/lua_ls.lua

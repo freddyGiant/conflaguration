@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home.packages = [ pkgs.basedpyright ];
   programs.neovim.initLua = config.lib.neovim.order.mkLsp /* lua */ ''
     on_attach('basedpyright', function(event, client)

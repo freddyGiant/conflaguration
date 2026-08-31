@@ -1,7 +1,8 @@
 {
   description = "A Vradical New Configuration Conflagaration";
 
-  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "nixpkgs/nixos-unstable"; # alias
+  inputs.nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # use this to be explicit
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.rad-flake.url = "github:freddyGiant/rad-flake";
 
@@ -13,20 +14,28 @@
   # to be overriden
   inputs.secret-settings.url = "";
 
-  outputs = {
-    flake-parts,
-    rad-flake,
-    ...
-  }@inputs:
-  flake-parts.lib.mkFlake { inherit inputs; } {
-    imports = [
-      rad-flake.flakeModules.default
-      ./modules/nixos
-      ./modules/home
-    ];
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { config, lib, inputs, ... }: {
+        imports = [
+          inputs.rad-flake.flakeModules.default
+        ];
 
-    perSystem = { pkgs-unstable, ... }: { formatter = pkgs-unstable.nixfmt-tree; };
-  };
+        config.lib.classOption = lib.mkOption {
+          type = lib.types.lazyAttrsOf lib.types.deferredModule;
+        };
+
+        options.nixos = config.lib.classOption;
+        options.home-manager = config.lib.classOption;
+
+        perSystem = { pkgs-unstable, ... }: {
+          formatter = pkgs-unstable.nixfmt-tree;
+        };
+
+        systems = [ "x86_64-linux" ];
+      }
+    );
 
   # outputs = { nixpkgs, home-manager, secret-settings, ... } @ inputs: let
   #   lib = nixpkgs.lib;
