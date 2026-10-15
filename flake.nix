@@ -18,22 +18,14 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { config, lib, inputs, ... }: {
-        # imports = [
-        #   inputs.rad-flake.flakeModules.default
-        # ];
-
-        config.lib.classOption = lib.mkOption {
-          type = lib.types.lazyAttrsOf lib.types.deferredModule;
-        };
-
-        options.nixos = config.lib.classOption;
-        options.home-manager = config.lib.classOption;
+        imports = [
+          inputs.flake-parts.flakeModules.modules
+          # inputs.rad-flake.flakeModules.default
+        ];
 
         perSystem = { pkgs-unstable, ... }: {
           formatter = pkgs-unstable.nixfmt-tree;
         };
-
-        systems = [ "x86_64-linux" ];
       }
     );
 
