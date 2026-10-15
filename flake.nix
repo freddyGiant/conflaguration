@@ -2,9 +2,9 @@
   description = "A Vradical New Configuration Conflagaration";
 
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable"; # alias
-  inputs.nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # use this to be explicit
+  # inputs.nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # use this to be explicit
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
-  inputs.rad-flake.url = "github:freddyGiant/rad-flake";
+  # inputs.rad-flake.url = "github:freddyGiant/rad-flake";
 
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -18,9 +18,9 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { config, lib, inputs, ... }: {
-        imports = [
-          inputs.rad-flake.flakeModules.default
-        ];
+        # imports = [
+        #   inputs.rad-flake.flakeModules.default
+        # ];
 
         config.lib.classOption = lib.mkOption {
           type = lib.types.lazyAttrsOf lib.types.deferredModule;
