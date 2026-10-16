@@ -25,8 +25,8 @@
           ./modules/hosts/tranticicero
         ];
 
-        perSystem = { pkgs-unstable, ... }: {
-          formatter = pkgs-unstable.nixfmt-tree;
+        perSystem = { pkgs, ... }: {
+          formatter = pkgs.nixfmt-tree;
         };
       }
     );
