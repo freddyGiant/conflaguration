@@ -16,8 +16,10 @@
 # - plasma-polkit
 # - sway migration
 # - gamescope??
+# - window swallowing
+
 { inputs, ... }: {
-  flake.modules.home-manager.niri = { pkgs-unstable, ... }: {
+  flake.modules.homeManager.niri = { pkgs, ... }: {
     imports = [ inputs.niri.homeModules.niri ];
     programs.niri.enable = true;
 
@@ -29,7 +31,7 @@
       enable = true;
       xdgOpenUsePortal = true;
       config.common.default = "*";
-      extraPortals = [ pkgs-unstable.xdg-desktop-portal-gtk ];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
 
     systemd.user.sessionVariables.NIXOS_OZONE_WL = "1";

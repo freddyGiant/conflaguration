@@ -7,7 +7,7 @@
   # inputs.rad-flake.url = "github:freddyGiant/rad-flake";
 
   inputs.home-manager.url = "github:nix-community/home-manager";
-  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.niri.url = "github:sodiboo/niri-flake";
 
