@@ -1,5 +1,13 @@
 # TODO: make this pattern into an option
 { pkgs, inputs, ... }: {
+  flake.modules.nixos.tranticicero = { ... }: {
+    imports = [
+      ./hardware-configuration.nix
+    ] ++ (with inputs.self.modules.nixos; [
+      niri
+    ]);
+  };
+
   flake.modules.homeManager.tranticicero.imports = with inputs.self.modules.homeManager; [
     gaming
     niri

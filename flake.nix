@@ -21,6 +21,8 @@
         imports = [
           inputs.flake-parts.flakeModules.modules
           # inputs.rad-flake.flakeModules.default
+
+          ./modules/hosts/tranticicero
         ];
 
         perSystem = { pkgs-unstable, ... }: {
