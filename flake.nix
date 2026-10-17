@@ -1,18 +1,22 @@
 {
   description = "A Vradical New Configuration Conflagaration";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-unstable"; # alias
-  # inputs.nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # use this to be explicit
-  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
-  # inputs.rad-flake.url = "github:freddyGiant/rad-flake";
+  inputs = {
+    nixpkgs.follows = "nixpkgs-unstable";
+    # to be overriden
+    secret-settings.url = "";
 
-  inputs.home-manager.url = "github:nix-community/home-manager";
-  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.    url = "github:nix-community/home-manager";
+    flake-parts.     url = "github:hercules-ci/flake-parts";
+    rad-flake.       url = "github:freddyGiant/rad-flake";
+    niri.            url = "github:sodiboo/niri-flake";
 
-  inputs.niri.url = "github:sodiboo/niri-flake";
-
-  # to be overriden
-  inputs.secret-settings.url = "";
+    home-manager.inputs.nixpkgs.    follows = "nixpkgs";
+    flake-parts. inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
+    rad-flake.   inputs.flake-parts.follows = "flake-parts";
+    niri.        inputs.nixpkgs.    follows = "nixpkgs";
+  };
 
   outputs =
     inputs:
