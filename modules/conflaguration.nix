@@ -21,7 +21,10 @@ in
     };
   in
   {
-    username = mkOption { type = types.str; };
+    username = mkOption {
+      default = "vrad";
+      type = lib.types.strMatching "^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$";
+    };
 
     features = mkOption {
       default = { };
@@ -50,7 +53,6 @@ in
             default = [ ];
           };
 
-          # TODO: could be rearranged along with the base features to not have any invariants
           class = mkOption {
             type = types.enum [
               "nixos"
@@ -60,7 +62,7 @@ in
           };
 
           nixos       = mkFeatureOption "nixos"       "conflaguration host ${name} base module";
-          # darwin      = mkFeature "darwin"      "conflaguration host ${name} base module";
+          # darwin      = mkFeatureOption "darwin"      "conflaguration host ${name} base module";
           homeManager = mkFeatureOption "homeManager" "conflaguration host ${name} base module";
         };
       }));
@@ -69,17 +71,21 @@ in
 
   config.flake =
   let
-    filterClass = class: lib.filterAttrs (_: x: x.class == class);
+    featuresOfClass = class: map (f: cfg.features.${f}.${class});
+    hostsOfClass = class: lib.filterAttrs (_: h: h.class == class) cfg.hosts;
   in
   {
-    nixosConfigurations = lib.mapAttrs (hostname: host:
-      inputs.nixpkgs.lib.nixosSystem {
-        modules = [
+    nixosConfigurations =
+      hostsOfClass "nixos"
+      |> lib.mapAttrs (
+        hostname: host:
+        inputs.nixpkgs.lib.nixosSystem { modules = [
           host.nixos
           {
-            imports = filterClass "nixos" cfg.features;
+            imports = featuresOfClass "nixos" host.features;
             networking.hostName = hostname;
             nixpkgs.hostPlatform = host.system;
+            users.users.${host.myUser}.isNormalUser = true;
 
             i18n.defaultLocale = "C.UTF-8";
 
@@ -89,18 +95,25 @@ in
               "pipe-operators"
               "flakes"
             ];
+            system.stateVersion = "25.11";
           }
 
           inputs.home-manager.nixosModules.home-manager
           {
+            home-manager.users.${host.myUser} = {
+              imports = [
+                host.homeManager
+                { imports = featuresOfClass "homeManager" host.features; }
+              ];
+
+              home.stateVersion = "25.11";
+            };
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${cfg.username}.imports =
-              [ host.homeManager ] ++ (filterClass "homeManager" cfg.features);
           }
-        ];
-      }
-    ) (filterClass "nixos" cfg.hosts);
+        ]; }
+      );
 
     # darwinConfigurations = lib.mapAttrs (name: host:
     #   inputs.nix-darwin.lib.darwinSystem {
