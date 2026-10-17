@@ -23,12 +23,10 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { config, lib, inputs, ... }: {
         imports = [
-          inputs.flake-parts.flakeModules.modules
-          # inputs.rad-flake.flakeModules.default
-
-          ./modules/hosts/tranticicero
+          ./modules/conflaguration.nix
         ];
 
+        systems = lib.systems.flakeExposed;
         perSystem = { pkgs, ... }: {
           formatter = pkgs.nixfmt-tree;
         };
