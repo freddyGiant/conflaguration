@@ -1,41 +1,27 @@
-# TODO: Add disko
-{ config, lib, ... }: {
-  imports = [ ./hardware-configuration.nix ];
-
-  services.logind.settings.Login.HandlePowerKey = "ignore";
-
-  boot.loader.efi.canTouchEfiVariables = true;
-  # where did these come from? don't remember
-  boot.initrd.availableKernelModules = [
-    "ahci"
-    "ehci_pci"
-    "sdhci_pci"
-    "rtsx_pci_sdmmc"
-    "sd_mod"
-    "usb_storage"
-  ];
-
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
+# TODO: make this pattern into an option
+{ pkgs, inputs, ... }: {
+  flake.modules.nixos.tranticicero = { ... }: {
+    imports = [
+      ./hardware-configuration.nix
+    ]
+    ++ (with inputs.self.modules.nixos; [
+      niri
+    ]);
   };
 
-  # DISK ENCRYPTION
+  flake.modules.homeManager.tranticicero.imports = with inputs.self.modules.homeManager; [
+    gaming
+    niri
+  ];
 
-  boot.initrd.kernelModules = [ "cryptd" ]; # see above?
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
-  services.lvm.enable = true;
-  services.udisks2.enable = true; # TODO: what depends on this again?
-  # IT'S IMPORTANT that this option only be set on LUKS-encrypted machines
-  services.getty.autologinUser = config.my.username;
+  flake.nixosConfigurations.tranticicero = pkgs.lib.nixosSystem {
+    specialArgs = { inherit inputs; };
+    modules = [
+      { networking.hostName = "tranticicero"; }
+      inputs.self.modules.nixos.tranticicero
 
-  hardware.graphics.enable = true;
-
-  # NOTE: reconsider when using systemd-networkd on servers?
-  networking.useDHCP = lib.mkDefault true;
-
-  hardware.enableAllFirmware = true;
-
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.11";
+      inputs.home-manager.nixosModules.home-manager
+      { home-manager.sharedModules = [ inputs.self.modules.homeManager.tranticicero ]; }
+    ];
+  };
 }

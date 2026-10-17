@@ -29,7 +29,8 @@
       }:
       {
         imports = [
-          ./modules/conflaguration.nix
+          ./conflaguration.nix
+          ./hosts/homonculus
         ];
 
         systems = lib.systems.flakeExposed;
