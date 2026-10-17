@@ -31,7 +31,6 @@ in
       type = types.lazyAttrsOf (types.submodule ({ name, ... }: {
         options = {
           nixos       = mkFeatureOption "nixos"       "conflaguration feature ${name}";
-          # darwin      = mkFeatureOption "darwin"      "conflaguration feature ${name}";
           homeManager = mkFeatureOption "homeManager" "conflaguration feature ${name}";
         };
       }));
@@ -56,13 +55,10 @@ in
           class = mkOption {
             type = types.enum [
               "nixos"
-              # "darwin"
-              # "homeManager"
             ];
           };
 
           nixos       = mkFeatureOption "nixos"       "conflaguration host ${name} base module";
-          # darwin      = mkFeatureOption "darwin"      "conflaguration host ${name} base module";
           homeManager = mkFeatureOption "homeManager" "conflaguration host ${name} base module";
         };
       }));
@@ -114,29 +110,5 @@ in
           }
         ]; }
       );
-
-    # darwinConfigurations = lib.mapAttrs (name: host:
-    #   inputs.nix-darwin.lib.darwinSystem {
-    #     modules = [
-    #       inputs.home-manager.darwinModules.home-manager
-    #       (homeManagerOs name host)
-    #       {
-    #         networking.hostName = name;
-    #         nixpkgs.hostPlatform = host.system;
-    #       }
-    #       host.darwin
-    #     ] ++ map (f: f.darwin) (featuresOf name host);
-    #   }
-    # ) (hostsOf "darwin");
-    #
-    # homeConfigurations = lib.mapAttrs (name: host:
-    #   inputs.home-manager.lib.homeManagerConfiguration {
-    #     pkgs = inputs.nixpkgs.legacyPackages.${host.system};
-    #     modules = [
-    #       { home.username = lib.mkDefault cfg.username; }
-    #       host.homeManager
-    #     ] ++ map (f: f.homeManager) (featuresOf name host);
-    #   }
-    # ) (hostsOf "homeManager");
   };
 }
