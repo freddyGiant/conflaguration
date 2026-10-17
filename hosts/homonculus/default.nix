@@ -4,6 +4,10 @@
     class = "nixos";
     system = "x86_64-linux";
 
+    features = [
+      "myDesktop"
+    ];
+
     nixos =
     { ... }:
     {
