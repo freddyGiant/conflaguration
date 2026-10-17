@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.gaming = {
+  conflaguration.modules.gaming.nixos = {
     programs.steam.enable = true;
     programs.steam = {
       # may or may not be necessary
