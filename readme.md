@@ -1,5 +1,15 @@
 # vrad's Configuration Conflagaration
 
+I'M USING THIS AS SCRATCH SPACE BECAUSE I'M A BAD PERSON.
+
+
+
+
+
+
+
+
+
 <!-- TODO: nice html? lol -->
 > Conflagaration *noun* \
 1 : fire \

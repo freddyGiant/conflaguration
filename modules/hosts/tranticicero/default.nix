@@ -3,7 +3,8 @@
   flake.modules.nixos.tranticicero = { ... }: {
     imports = [
       ./hardware-configuration.nix
-    ] ++ (with inputs.self.modules.nixos; [
+    ]
+    ++ (with inputs.self.modules.nixos; [
       niri
     ]);
   };

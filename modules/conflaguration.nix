@@ -5,27 +5,28 @@ let
 in
 {
   options.conflaguration.modules = lib.mkOption {
-    type = types.lazyAttrsOf (types.submodule (
-      { name, ... }:
-      let
-        withClass = class: lib.mkOption {
-          type = types.deferredModule;
-          default = { };
-          apply =
-            m:
-            { ... }:
-            {
-              _class = class;
-              _file = "conflaguration.modules.${name}.${class}";
-              imports = [ m ];
+    type = types.lazyAttrsOf (
+      types.submodule (
+        { name, ... }:
+        let
+          withClass =
+            class:
+            lib.mkOption {
+              type = types.deferredModule;
+              default = { };
+              apply = m: { ... }: {
+                _class = class;
+                _file = "conflaguration.modules.${name}.${class}";
+                imports = [ m ];
+              };
             };
-        };
-      in
-      {
-        options.nixos       = withClass "nixos";
-        options.homeManager = withClass "homeManager";
-      }
-    ));
+        in
+        {
+          options.nixos = withClass "nixos";
+          options.homeManager = withClass "homeManager";
+        }
+      )
+    );
     default = { };
   };
 }
