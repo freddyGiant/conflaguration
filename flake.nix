@@ -31,6 +31,8 @@
         imports = [
           ./conflaguration.nix
           ./hosts/homonculus
+          ./features/niri.nix
+          ./features/foot.nix
         ];
 
         systems = lib.systems.flakeExposed;

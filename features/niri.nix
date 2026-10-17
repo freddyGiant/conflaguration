@@ -18,9 +18,17 @@
 # - gamescope??
 # - window swallowing
 
-{ inputs, ... }: {
-  flake.modules.homeManager.niri = { pkgs, ... }: {
+{ config, inputs, ... }:
+let
+  inherit (config) conflaguration;
+in
+{
+  conflaguration.features.myDesktop.homeManager =
+  { pkgs, ... }:
+  {
     imports = [ inputs.niri.homeModules.niri ];
+    # FIXME: flake version unmaintained, dependency out of date! uh oh
+    programs.niri.package = pkgs.niri;
     programs.niri.enable = true;
 
     programs.niri.settings.binds = {
@@ -37,14 +45,16 @@
     systemd.user.sessionVariables.NIXOS_OZONE_WL = "1";
   };
 
-  flake.modules.nixos.niri = { config, ... }: {
+  conflaguration.features.myDesktop.nixos =
+  { config, ... }:
+  {
     programs.niri.enable = true;
 
     services.greetd = {
       enable = true;
       settings.default_session = {
         command = "${config.programs.niri.package}/bin/niri-session";
-        user = config.my.username;
+        user = conflaguration.username;
       };
     };
 
