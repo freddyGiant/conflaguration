@@ -13,6 +13,6 @@
     programs.foot.server.enable = true;
     programs.foot.server.systemdTarget = "graphical-session.target";
 
-    programs.niri.settings.binds."Mod+T".action.spawn = [ "footclient" ];
+    programs.niri.settings.binds."Mod+T".spawn = [ "footclient" ];
   };
 }
