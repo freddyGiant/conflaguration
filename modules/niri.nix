@@ -18,60 +18,63 @@
 # - gamescope??
 # - window swallowing
 
-{ config, inputs, ... }:
+{ config, moduleWithSystem, ... }:
 let
   inherit (config) conflaguration;
 in
 {
-  conflaguration.features.myDesktop.homeManager =
-  { pkgs, ... }:
-  {
-    imports = [ inputs.niri.homeModules.niri ];
-    # FIXME: flake version unmaintained, dependency out of date! uh oh
-    programs.niri.package = pkgs.niri;
-    programs.niri.enable = true;
+  # share system niri from pkgs
+  conflaguration.features.myDesktop.homeManager = moduleWithSystem (
+    { pkgs, ... }:
+    {
+      wayland.windowManager.niri.enable = true;
+      wayland.windowManager.niri.package = pkgs.niri;
 
-    programs.niri.settings.prefer-no-csd = true;
-    programs.niri.settings.binds = {
-      "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
-      "Ctrl+Alt+Delete".action.quit = [ ];
-      # TODO: you know what
-      # TODO: screenshot -> clipboard?
-      Print.action.screenshot = [ ];
-    };
-
-    # TODO: move me to directories?
-    programs.niri.settings.screenshot-path =
-      "${config.xdg.userDirs.pictures}/screenshots/%Y-%m-%d_%H-%M-%S.png";
-
-
-
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      config.common.default = "*";
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    };
-
-    systemd.user.sessionVariables.NIXOS_OZONE_WL = "1";
-  };
-
-  conflaguration.features.myDesktop.nixos =
-  { config, ... }:
-  {
-    programs.niri.enable = true;
-
-    services.greetd = {
-      enable = true;
-      settings.default_session = {
-        command = "${config.programs.niri.package}/bin/niri-session";
-        user = conflaguration.username;
+      wayland.windowManager.niri.settings.prefer-no-csd = { };
+      wayland.windowManager.niri.settings.binds = {
+        "Mod+Shift+Slash".show-hotkey-overlay = { };
+        "Ctrl+Alt+Delete".quit = { };
+        # TODO: you know what
+        # TODO: screenshot -> clipboard?
+        Print.screenshot = { };
       };
-    };
 
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-  };
+      # TODO: move me to directories?
+      wayland.windowManager.niri.settings.screenshot-path =
+        "${config.xdg.userDirs.pictures}/screenshots/%Y-%m-%d_%H-%M-%S.png";
+
+      xdg.portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        config.common.default = "*";
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      };
+
+      # is this necessary?
+      systemd.user.sessionVariables.NIXOS_OZONE_WL = "1";
+    }
+  );
+
+  conflaguration.features.myDesktop.nixos = moduleWithSystem (
+    { pkgs, ... }: (
+      { config, ... }:
+      {
+        programs.niri.enable = true;
+        programs.niri.package = pkgs.niri;
+
+        services.greetd = {
+          enable = true;
+          settings.default_session = {
+            command = "${config.programs.niri.package}/bin/niri-session";
+            user = conflaguration.username;
+          };
+        };
+
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true;
+        };
+      }
+    )
+  );
 }
