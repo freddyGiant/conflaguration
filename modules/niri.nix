@@ -31,9 +31,20 @@ in
     programs.niri.package = pkgs.niri;
     programs.niri.enable = true;
 
+    programs.niri.settings.prefer-no-csd = true;
     programs.niri.settings.binds = {
       "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
+      "Ctrl+Alt+Delete".action.quit = [ ];
+      # TODO: you know what
+      # TODO: screenshot -> clipboard?
+      Print.action.screenshot = [ ];
     };
+
+    # TODO: move me to directories?
+    programs.niri.settings.screenshot-path =
+      "${config.xdg.userDirs.pictures}/screenshots/%Y-%m-%d_%H-%M-%S.png";
+
+
 
     xdg.portal = {
       enable = true;
