@@ -10,12 +10,10 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-parts.url = "github:hercules-ci/flake-parts";
     rad-flake.url = "github:freddyGiant/rad-flake";
-    niri.url = "github:sodiboo/niri-flake";
 
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
     rad-flake.inputs.flake-parts.follows = "flake-parts";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
