@@ -91,7 +91,8 @@ in
               "pipe-operators"
               "flakes"
             ];
-            system.stateVersion = "25.11";
+            # unfortunate? but we don't change it too often
+            system.stateVersion = "25.05";
           }
 
           inputs.home-manager.nixosModules.home-manager
@@ -102,7 +103,7 @@ in
                 { imports = featuresOfClass "homeManager" host.features; }
               ];
 
-              home.stateVersion = "25.11";
+              home.stateVersion = "26.11";
             };
 
             home-manager.useGlobalPkgs = true;
